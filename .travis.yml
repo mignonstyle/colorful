@@ -1,32 +1,76 @@
+# Travis CI configuration file.
+# @link https://travis-ci.org/
+
+# For use with the Colorful WordPress theme.
+# @link https://github.com/mignonstyle/colorful
+
+# Declare project language and PHP versions to test against.
+# @link http://about.travis-ci.org/docs/user/languages/php/
 language: php
 
+# Declare versions of PHP to use. Use one decimal max.
 php:
-    - 5.3
+    - 7.0
     - 5.6
-    - 7
+    - 5.5
+    - 5.4
+    - 5.3
 
-branches:
-    only:
-        - master
+# Ditch sudo and use containers.
+# @link http://docs.travis-ci.com/user/migrating-from-legacy/#Why-migrate-to-container-based-infrastructure%3F
+# @link http://docs.travis-ci.com/user/workers/container-based-infrastructure/#Routing-your-build-to-container-based-infrastructure
+sudo: false
 
+# Declare which versions of WordPress to test against.
+# Also declare whether or not to test in Multisite.
+env:
+    # Trunk (current version in development is 4.4)
+    # @link https://github.com/WordPress/WordPress
+    - WP_VERSION=master WP_MULTISITE=0
+    - WP_VERSION=master WP_MULTISITE=1
+    - WP_VERSION=4.6 WP_MULTISITE=0
+    - WP_VERSION=4.6 WP_MULTISITE=1
+
+# You can cache arbitrary directories.
+# @link https://docs.travis-ci.com/user/caching/
 cache:
     directories:
-        - node_modules
+        - node_modules # NPM packages
 
+# Use this to prepare your build for testing.
+# e.g. copy database configurations, environment variables, etc.
+# Failures in this section will result in build status 'errored'.
 before_script:
     # bash ./bin/build.sh
     - npm install
     - npm run build
 
+# Run test script commands.
+# Default is specific to project language.
+# All commands must exit with code 0 on success. Anything else is considered failure.
 script:
     - ls -al style.css
 
-after_success: bash ./bin/deploy.sh
 
+
+# branches:
+#    only:
+#        - master
+
+
+
+
+
+
+# after_success: bash ./bin/deploy.sh
+
+
+# Receive notifications for build results.
+# @link http://docs.travis-ci.com/user/notifications/#Email-notifications
 notifications:
     email: false
 
-env:
-      global:
-          - GH_REF: github.com/mignonstyle/colorful.git
-          - secure: "vX0+U2wED38jgZRubhLIW1XrYFu33Ciu54ZeF2QO044pG7eEgDBpLUwJdZEK40sfYhPbmKqI0DktxvJYchwBTybnaYg+f130Ov6ygjD5Sw6shFuAc0wLqT6DeE2M9nPsmhohhgK+NBjWRV2VCyLnyg/rp7K5ZQScFhJdy2ZHcNnNpUL/6ONVv/BZOKmb2hFRx1H63sw8azb8HxkjoO1kNJXpMQbPbNborDenl6aVih9f1KIvoSpjcxeiT9Y0PeUQVr6H/BDS9gfKSBcu5ugLbv7fXCO95NdGX2eZ0lb4cb4vbRqv4JqyR47lFlSir3Aa/cOTRH/pd7nFQIAEDB6bstw2Fpm2udz9lhZ5E7rw/L1b3tVxFszpiZghxtpsepm+Y8pDJ1ihWbKnTuuG9bMTjzXWA7yuMHy7zSp+GUgKfVwaxaWXmdrQaeEQ+6mA1E4vsuKZEztwwqvR+WCAi+no0XIVIuQBkYgk6PS6y4w5Vg2cCbOr5mOQv72ISro5kFXIGJQoa+RJs44/MN4dli5Jxksxu3iMxE6rb8sSAurnPKdmcGHwMiK27R3JVxX3KirG4oSBuk+jCnfPRVFwkjAvpEkWTDo9rZnd20wMXixgr2gnNVFUaEsU7UntRAIRlXJEBQC8i67mo2TQ4JZGHRKdZOhc1HP4q233/g/znQw0bqk="
+# env:
+      # global:
+         # - GH_REF: github.com/mignonstyle/colorful.git
+         # - secure: "vX0+U2wED38jgZRubhLIW1XrYFu33Ciu54ZeF2QO044pG7eEgDBpLUwJdZEK40sfYhPbmKqI0DktxvJYchwBTybnaYg+f130Ov6ygjD5Sw6shFuAc0wLqT6DeE2M9nPsmhohhgK+NBjWRV2VCyLnyg/rp7K5ZQScFhJdy2ZHcNnNpUL/6ONVv/BZOKmb2hFRx1H63sw8azb8HxkjoO1kNJXpMQbPbNborDenl6aVih9f1KIvoSpjcxeiT9Y0PeUQVr6H/BDS9gfKSBcu5ugLbv7fXCO95NdGX2eZ0lb4cb4vbRqv4JqyR47lFlSir3Aa/cOTRH/pd7nFQIAEDB6bstw2Fpm2udz9lhZ5E7rw/L1b3tVxFszpiZghxtpsepm+Y8pDJ1ihWbKnTuuG9bMTjzXWA7yuMHy7zSp+GUgKfVwaxaWXmdrQaeEQ+6mA1E4vsuKZEztwwqvR+WCAi+no0XIVIuQBkYgk6PS6y4w5Vg2cCbOr5mOQv72ISro5kFXIGJQoa+RJs44/MN4dli5Jxksxu3iMxE6rb8sSAurnPKdmcGHwMiK27R3JVxX3KirG4oSBuk+jCnfPRVFwkjAvpEkWTDo9rZnd20wMXixgr2gnNVFUaEsU7UntRAIRlXJEBQC8i67mo2TQ4JZGHRKdZOhc1HP4q233/g/znQw0bqk="
