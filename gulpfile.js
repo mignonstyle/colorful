@@ -15,7 +15,6 @@ var gulp         = require('gulp'),
 	jscs         = require('gulp-jscs'),
 	jshint       = require('gulp-jshint'),
 	stylish      = require('jshint-stylish'),
-	eslint       = require('gulp-eslint'),
 	runSequence  = require('run-sequence'),
 	concat       = require('gulp-concat'),
 	uglify       = require('gulp-uglify'),
@@ -137,13 +136,7 @@ gulp.task('jshint', function(){
 		.pipe(jshint.reporter('jshint-stylish'))
 		.pipe(jshint.reporter('fail'));
 });
-/*
-gulp.task('eslint', function () {
-	return gulp.src(paths.jsSrc)
-		.pipe(eslint())
-		.pipe(eslint.format());
-});
-*/
+
 gulp.task('js-concat', function(cb){
 	return gulp.src(paths.jsSrc)
 		.pipe(plumber())
@@ -160,7 +153,6 @@ gulp.task('js-min', function(){
 });
 
 gulp.task('js', function(cb){
-	//runSequence('jscs', 'jshint', 'eslint', 'js-concat', 'js-min', cb);
 	runSequence('jscs', 'jshint', 'js-concat', 'js-min', cb);
 });
 
