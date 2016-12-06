@@ -30,8 +30,8 @@ endif;
 if ( ! function_exists( 'colorful_footer_powered' ) ) :
 function colorful_footer_powered() {
 	$theme_name    = __( 'Colorful', 'colorful' );
-	$theme_url     = 'http://mignonstyle.com/';
-	$wordpress_url = ( 'ja' == get_locale() ) ? 'https://ja.wordpress.org/' : 'https://wordpress.org/';
+	$theme_url     = __( 'http://mignonstyle.com/', 'colorful' );
+	$wordpress_url = ( 'ja' == get_locale() ) ? __( 'https://ja.wordpress.org/', 'colorful' ) : __( 'https://wordpress.org/', 'colorful' );
 
 	$theme_link    = sprintf(
 		'<a href="%s" target="_blank">%s</a>',
