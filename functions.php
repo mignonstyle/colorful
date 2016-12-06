@@ -94,6 +94,7 @@ require get_template_directory() . '/inc/template-tags.php';
 require get_template_directory() . '/inc/functions/functions-common.php';
 require get_template_directory() . '/inc/functions/functions-copyright.php';
 
+require get_template_directory() . '/inc/functions/functions-pagenavi.php';
 
 
 // Custom functions that act independently of the theme templates.
