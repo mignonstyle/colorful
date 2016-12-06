@@ -95,10 +95,10 @@ require get_template_directory() . '/inc/functions/functions-common.php';
 
 
 
-/**
- * Custom functions that act independently of the theme templates.
- */
+
+// Custom functions that act independently of the theme templates.
 require get_template_directory() . '/inc/extras.php';
+require get_template_directory() . '/inc/extras/extras-common.php';
 
 /**
  * Customizer additions.
