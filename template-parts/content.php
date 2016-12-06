@@ -19,7 +19,10 @@
 		endif;
 		?>
 
-		<?php colorful_entry_meta_header(); ?>
+		<?php
+		// Prints posting meta information in content header.
+		colorful_entry_meta_header();
+		?>
 	</header><!-- .entry-header -->
 
 	<div class="entry-content">
@@ -37,7 +40,8 @@
 		?>
 	</div><!-- .entry-content -->
 
-	<footer class="entry-footer">
-		<?php colorful_entry_footer(); ?>
-	</footer><!-- .entry-footer -->
+	<?php
+	// Prints posting meta information in content footer.
+	colorful_entry_meta_footer();
+	?>
 </article><!-- #post-## -->

@@ -23,47 +23,31 @@ function colorful_entry_meta_header() {
 }
 endif;
 
-if ( ! function_exists( 'colorful_entry_footer' ) ) :
 /**
- * Prints HTML with meta information for the categories, tags and comments.
+ * Prints posting meta information in content footer.
  */
-function colorful_entry_footer() {
-	// Hide category and tag text for pages.
-	if ( 'post' === get_post_type() ) {
-		/* translators: used between list items, there is a space after the comma */
-		$categories_list = get_the_category_list( esc_html__( ', ', 'colorful' ) );
-		if ( $categories_list && colorful_categorized_blog() ) {
-			printf( '<span class="cat-links">' . esc_html__( 'Posted in %1$s', 'colorful' ) . '</span>', $categories_list ); // WPCS: XSS OK.
-		}
+if ( ! function_exists( 'colorful_entry_meta_footer' ) ) :
+function colorful_entry_meta_footer() {
+	echo '<footer class="entry-footer">';
 
-		/* translators: used between list items, there is a space after the comma */
-		$tags_list = get_the_tag_list( '', esc_html__( ', ', 'colorful' ) );
-		if ( $tags_list ) {
-			printf( '<span class="tags-links">' . esc_html__( 'Tagged %1$s', 'colorful' ) . '</span>', $tags_list ); // WPCS: XSS OK.
-		}
-	}
+	// entry meta category.
+	colorful_entry_meta_cat();
 
-	if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
-		echo '<span class="comments-link">';
-		/* translators: %s: post title */
-		comments_popup_link( sprintf( wp_kses( __( 'Leave a Comment<span class="screen-reader-text"> on %s</span>', 'colorful' ), array( 'span' => array( 'class' => array() ) ) ), get_the_title() ) );
-		echo '</span>';
-	}
+	// entry meta tags.
+	colorful_entry_meta_tags();
 
-	edit_post_link(
-		sprintf(
-			/* translators: %s: Name of current post */
-			esc_html__( 'Edit %s', 'colorful' ),
-			the_title( '<span class="screen-reader-text">"', '"</span>', false )
-		),
-		'<span class="edit-link">',
-		'</span>'
-	);
+	// entry meta edit.
+	colorful_entry_meta_edit();
+
+	// entry meta comments link.
+	colorful_entry_meta_comments_link();
+
+	echo '</footer>';
 }
 endif;
 
 /**
- * entry meta date time
+ * entry meta date time.
  */
 if ( ! function_exists( 'colorful_entry_meta_date' ) ) :
 function colorful_entry_meta_date() {
@@ -87,7 +71,7 @@ function colorful_entry_meta_date() {
 		esc_html( get_the_modified_date() )
 	);
 
-	echo '<span class="entry-meta-date">';
+	echo '<span class="entry-meta-date  entry-metadata">';
 	echo wp_kses( $meta_date_icon, colorful_wp_kses_allowed_html_icon() );
 	echo wp_kses( $meta_date, array( 'time' => array( 'class' => array(), 'datetime' => array() ) ) );
 	echo '</span>';
@@ -95,7 +79,7 @@ function colorful_entry_meta_date() {
 endif;
 
 /**
- * entry meta author
+ * entry meta author.
  */
 if ( ! function_exists( 'colorful_entry_meta_author' ) ) :
 function colorful_entry_meta_author() {
@@ -108,13 +92,97 @@ function colorful_entry_meta_author() {
 
 	$meta_author = '<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>';
 
-	echo '<span class="entry-meta-author">';
+	echo '<span class="entry-meta-author  entry-metadata">';
 	echo wp_kses( $meta_author_icon, colorful_wp_kses_allowed_html_icon() );
 	echo wp_kses( $meta_author, array( 'span' => array( 'class' => array() ), 'a' => array( 'class' => array(), 'href' => array() ) ) );
 	echo '</span>';
 }
 endif;
 
+/**
+ * entry meta category.
+ */
+if ( ! function_exists( 'colorful_entry_meta_cat' ) ) :
+function colorful_entry_meta_cat() {
+	$meta_cat_icon = '<i class="fa fa-folder-open"></i>';
+	$meta_cat_icon = apply_filters( 'colorful_meta_cat_icon', $meta_cat_icon );
+
+	if ( 'post' === get_post_type() ) {
+		// translators: used between list items, there is a space after the comma.
+		$categories_list = get_the_category_list( esc_html__( ', ', 'colorful' ) );
+
+		if ( $categories_list && colorful_categorized_blog() ) {
+			echo '<span class="entry-meta-cat entry-metadata">';
+			echo wp_kses( $meta_cat_icon, colorful_wp_kses_allowed_html_icon() );
+			echo wp_kses( $categories_list, colorful_wp_kses_allowed_html_link() );
+			echo '</span>';
+		}
+	}
+}
+endif;
+
+/**
+ * entry meta tags.
+ */
+if ( ! function_exists( 'colorful_entry_meta_tags' ) ) :
+function colorful_entry_meta_tags() {
+	$meta_tags_icon = '<i class="fa fa-tags"></i>';
+	$meta_tags_icon = apply_filters( 'colorful_meta_tags_icon', $meta_tags_icon );
+
+	if ( 'post' === get_post_type() ) {
+		// translators: used between list items, there is a space after the comma.
+		$tags_list = get_the_tag_list( '', esc_html__( ', ', 'colorful' ) );
+		if ( $tags_list ) {
+			echo '<span class="entry-meta-tags entry-metadata tags-links">';
+			echo wp_kses( $meta_tags_icon, colorful_wp_kses_allowed_html_icon() );
+			echo wp_kses( $tags_list, colorful_wp_kses_allowed_html_link() );
+			echo '</span>';
+		}
+	}
+}
+endif;
+
+/**
+ * entry meta edit.
+ */
+if ( ! function_exists( 'colorful_entry_meta_edit' ) ) :
+function colorful_entry_meta_edit() {
+	$meta_edit_icon = '<i class="fa fa-pencil"></i>';
+	$meta_edit_icon = apply_filters( 'colorful_meta_edit_icon', $meta_edit_icon );
+
+	edit_post_link(
+		sprintf(
+			// translators: %s: Name of current post.
+			esc_html__( 'Edit %s', 'colorful' ),
+			the_title( '<span class="screen-reader-text">"', '"</span>', false )
+		),
+		'<span class="entry-meta-edit entry-metadata edit-link">' . $meta_edit_icon,
+		'</span>'
+	);
+}
+endif;
+
+/**
+ * entry meta comments link.
+ */
+if ( ! function_exists( 'colorful_entry_meta_comments_link' ) ) :
+function colorful_entry_meta_comments_link() {
+	if (  is_singular() ) {
+		return false;
+	}
+
+	$meta_comments_icon = '<i class="fa fa-comment"></i>';
+	$meta_comments_icon = apply_filters( 'colorful_meta_comments_icon', $meta_comments_icon );
+
+	if ( ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
+		echo '<span class="entry-meta-comments entry-metadata comments-link">';
+		echo wp_kses( $meta_comments_icon, colorful_wp_kses_allowed_html_icon() );
+		// translators: %s: post title.
+		comments_popup_link( sprintf( wp_kses( __( '<span class="screen-reader-text"> on %s</span>', 'colorful' ), array( 'span' => array( 'class' => array() ) ) ), get_the_title() ) );
+		echo '</span>';
+	}
+}
+endif;
 
 /**
  * Returns true if a blog has more than 1 category.

@@ -13,14 +13,18 @@
 	<header class="entry-header">
 		<?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
 
-		<?php colorful_entry_meta_header(); ?>
+		<?php
+		// Prints posting meta information in content header.
+		colorful_entry_meta_header();
+		?>
 	</header><!-- .entry-header -->
 
 	<div class="entry-summary">
 		<?php the_excerpt(); ?>
 	</div><!-- .entry-summary -->
 
-	<footer class="entry-footer">
-		<?php colorful_entry_footer(); ?>
-	</footer><!-- .entry-footer -->
+	<?php
+	// Prints posting meta information in content footer.
+	colorful_entry_meta_footer();
+	?>
 </article><!-- #post-## -->
