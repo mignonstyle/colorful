@@ -1,28 +1,28 @@
 {
-    "name": "mignonstyle/colorful",
-    "description": "",
-    "type": "wordpress-theme",
-    "require-dev": {
-        "squizlabs/php_codesniffer": "^2.6",
-        "wp-coding-standards/wpcs": "^0.10.0",
-        "phpmd/phpmd": "@stable"
-    },
-    "license": "GPLv2",
-    "authors": [
-        {
-            "name": "Mignon Style"
-        }
-    ],
-    "require": {},
-    "scripts" :{
-        "post-install-cmd": [
-            "php vendor/bin/phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs/"
-        ],
-        "post-update-cmd": [
-            "php vendor/bin/phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs/"
-        ],
-        "test": [
-            "php vendor/bin/phpcs -p -s -v -n . --standard=./codesniffer.ruleset.xml --extensions=php"
-        ]
+  "name": "mignonstyle/colorful",
+  "description": "Colorful is WordPress theme.",
+  "authors": [
+    {
+      "name": "Mignon Style"
     }
+  ],
+  "license": "GPLv2",
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^2.6",
+    "wp-coding-standards/wpcs": "^0.10.0",
+    "phpmd/phpmd": "*"
+  },
+  "require": {},
+  "scripts" :{
+    "post-install-cmd": [
+      "php vendor/bin/phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs/"
+    ],
+    "post-update-cmd": [
+      "php vendor/bin/phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs/"
+    ],
+    "test": [
+      "php vendor/bin/phpcs -p -s -v -n . --standard=./rulesets/phpcs.ruleset.xml --extensions=php",
+      "phpmd 404.php,archive.php,comments.php,footer.php,functions.php,header.php,inc,index.php,layouts,page.php,search.php,sidebar.php,single.php,template-parts text ./rulesets/phpmd.ruleset.xml"
+    ]
+  }
 }
