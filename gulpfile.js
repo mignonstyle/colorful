@@ -125,13 +125,12 @@ gulp.task('scss', function(){
 // ------------------------------------------------
 // JS Tasks
 // ------------------------------------------------
-/*
 gulp.task('jscs', function () {
 	return gulp.src(paths.jsSrc)
 		.pipe(jscs())
 		.pipe(jscs.reporter());
 });
-*/
+
 gulp.task('jshint', function(){
 	return gulp.src(paths.jsSrc)
 		.pipe(jshint('.jshintrc'))
@@ -162,7 +161,7 @@ gulp.task('js-min', function(){
 
 gulp.task('js', function(cb){
 	//runSequence('jscs', 'jshint', 'eslint', 'js-concat', 'js-min', cb);
-	runSequence('jshint', 'js-concat', 'js-min', cb);
+	runSequence('jscs', 'jshint', 'js-concat', 'js-min', cb);
 });
 
 // ------------------------------------------------
