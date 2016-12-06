@@ -10,6 +10,7 @@
 /**
  * Enqueue scripts and styles.
  */
+if ( ! function_exists( 'colorful_enqueue_scripts' ) ) :
 function colorful_enqueue_scripts() {
 	// Get the theme version.
 	$theme_data    = wp_get_theme();
@@ -49,11 +50,13 @@ function colorful_enqueue_scripts() {
 	wp_enqueue_script( 'colorful-html5shiv',get_template_directory_uri() . '/ library/html5shiv/html5shiv-printshiv.min.js', array(), '3.7.3', true );
 	wp_script_add_data( 'colorful-html5shiv', 'conditional', 'lt IE 9' );
 }
+endif;
 add_action( 'wp_enqueue_scripts', 'colorful_enqueue_scripts' );
 
 /**
  * Adds extra scripts and styles.
  */
+if ( ! function_exists( 'colorful_enqueue_inline_scripts' ) ) :
 function colorful_enqueue_inline_scripts() {
 	/*
 	$custom_css = '
@@ -63,4 +66,5 @@ function colorful_enqueue_inline_scripts() {
 	wp_add_inline_style( 'colorful-base', $custom_css, 2 );
 	*/
 }
+endif;
 add_action( 'wp_enqueue_scripts', 'colorful_enqueue_inline_scripts' );
