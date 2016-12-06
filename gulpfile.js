@@ -172,7 +172,7 @@ gulp.task('watch', [
 gulp.task('default', [
 		'scss',
 		'js',
-		//'watch',
+		'watch',
 	],
 	function(){
 });
