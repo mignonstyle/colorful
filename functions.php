@@ -42,11 +42,6 @@ function colorful_setup() {
 	 */
 	add_theme_support( 'post-thumbnails' );
 
-	// This theme uses wp_nav_menu() in one location.
-	register_nav_menus( array(
-		'primary' => esc_html__( 'Primary', 'colorful' ),
-	) );
-
 	/*
 	 * Switch default core markup for search form, comment form, and comments
 	 * to output valid HTML5.
@@ -101,10 +96,11 @@ add_action( 'widgets_init', 'colorful_widgets_init' );
 // Enqueue scripts and styles.
 require get_template_directory() . '/inc/enqueue-scripts.php';
 
-/**
- * Implement the Custom Header feature.
- */
+// Implement the Custom Header feature.
 require get_template_directory() . '/inc/custom-header.php';
+
+// Enable custom menu functions.
+require get_template_directory() . '/inc/custom-menu.php';
 
 /**
  * Custom template tags for this theme.
