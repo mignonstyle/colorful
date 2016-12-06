@@ -42,8 +42,8 @@ var paths = {
 	// php
 	'phpSrc' : './**/*.php',
 	// scss
-	//'scssSrc': './src/scss/**/*.scss',
-	'scssSrc': './sass/*.scss',
+	'scssSrc': './src/scss/*.scss',
+	//'scssSrc': './sass/*.scss',
 	// css
 	//'scssDir': './css/',
 	'scssDir': './',
@@ -172,7 +172,7 @@ gulp.task('watch', [
 gulp.task('default', [
 		'scss',
 		'js',
-		//'watch',
+		'watch',
 	],
 	function(){
 });
