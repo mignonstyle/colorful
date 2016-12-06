@@ -92,7 +92,7 @@ require get_template_directory() . '/inc/thumbnails.php';
  */
 require get_template_directory() . '/inc/template-tags.php';
 require get_template_directory() . '/inc/functions/functions-common.php';
-
+require get_template_directory() . '/inc/functions/functions-copyright.php';
 
 
 
