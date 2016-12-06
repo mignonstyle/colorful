@@ -83,6 +83,9 @@ require get_template_directory() . '/inc/custom-menu.php';
 // Register widget area.
 require get_template_directory() . '/inc/register-widgets.php';
 
+// The thumbnails settings.
+require get_template_directory() . '/inc/thumbnails.php';
+
 
 /**
  * Custom template tags for this theme.
