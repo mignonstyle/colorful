@@ -107,16 +107,3 @@ function colorful_categorized_blog() {
 		return false;
 	}
 }
-
-/**
- * Flush out the transients used in colorful_categorized_blog.
- */
-function colorful_category_transient_flusher() {
-	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-		return;
-	}
-	// Like, beat it. Dig?
-	delete_transient( 'colorful_categories' );
-}
-add_action( 'edit_category', 'colorful_category_transient_flusher' );
-add_action( 'save_post',     'colorful_category_transient_flusher' );
