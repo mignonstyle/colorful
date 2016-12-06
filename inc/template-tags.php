@@ -7,35 +7,19 @@
  * @package colorful
  */
 
-if ( ! function_exists( 'colorful_posted_on' ) ) :
 /**
- * Prints HTML with meta information for the current post-date/time and author.
+ * Prints posting meta information in content header.
  */
-function colorful_posted_on() {
-	$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
-	if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
-		$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
-	}
+if ( ! function_exists( 'colorful_entry_meta_header' ) ) :
+function colorful_entry_meta_header() {
+	echo '<div class="entry-meta">';
+	// entry meta date time.
+	colorful_entry_meta_date();
 
-	$time_string = sprintf( $time_string,
-		esc_attr( get_the_date( 'c' ) ),
-		esc_html( get_the_date() ),
-		esc_attr( get_the_modified_date( 'c' ) ),
-		esc_html( get_the_modified_date() )
-	);
+	// entry meta author.
+	colorful_entry_meta_author();
 
-	$posted_on = sprintf(
-		esc_html_x( 'Posted on %s', 'post date', 'colorful' ),
-		'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
-	);
-
-	$byline = sprintf(
-		esc_html_x( 'by %s', 'post author', 'colorful' ),
-		'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
-	);
-
-	echo '<span class="posted-on">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span>'; // WPCS: XSS OK.
-
+	echo '</div>';
 }
 endif;
 
@@ -79,10 +63,65 @@ function colorful_entry_footer() {
 endif;
 
 /**
+ * entry meta date time
+ */
+if ( ! function_exists( 'colorful_entry_meta_date' ) ) :
+function colorful_entry_meta_date() {
+	if ( 'post' != get_post_type() ) {
+		return false;
+	}
+
+	$meta_date_icon = '<i class="fa fa-clock-o"></i>';
+	$meta_date_icon = apply_filters( 'colorful_meta_date_icon', $meta_date_icon );
+
+	$meta_date = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
+
+	if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
+		$meta_date = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
+	}
+
+	$meta_date = sprintf( $meta_date,
+		esc_attr( get_the_date( 'c' ) ),
+		esc_html( get_the_date() ),
+		esc_attr( get_the_modified_date( 'c' ) ),
+		esc_html( get_the_modified_date() )
+	);
+
+	echo '<span class="entry-meta-date">';
+	echo wp_kses( $meta_date_icon, colorful_wp_kses_allowed_html_icon() );
+	echo wp_kses( $meta_date, array( 'time' => array( 'class' => array(), 'datetime' => array() ) ) );
+	echo '</span>';
+}
+endif;
+
+/**
+ * entry meta author
+ */
+if ( ! function_exists( 'colorful_entry_meta_author' ) ) :
+function colorful_entry_meta_author() {
+	if ( 'post' != get_post_type() ) {
+		return false;
+	}
+
+	$meta_author_icon = '<i class="fa fa-user"></i>';
+	$meta_author_icon = apply_filters( 'colorful_meta_author_icon', $meta_author_icon );
+
+	$meta_author = '<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>';
+
+	echo '<span class="entry-meta-author">';
+	echo wp_kses( $meta_author_icon, colorful_wp_kses_allowed_html_icon() );
+	echo wp_kses( $meta_author, array( 'span' => array( 'class' => array() ), 'a' => array( 'class' => array(), 'href' => array() ) ) );
+	echo '</span>';
+}
+endif;
+
+
+/**
  * Returns true if a blog has more than 1 category.
  *
  * @return bool
  */
+if ( ! function_exists( 'colorful_categorized_blog' ) ) :
 function colorful_categorized_blog() {
 	if ( false === ( $all_the_cool_cats = get_transient( 'colorful_categories' ) ) ) {
 		// Create an array of all the categories that are attached to posts.
@@ -107,3 +146,4 @@ function colorful_categorized_blog() {
 		return false;
 	}
 }
+endif;
