@@ -25,7 +25,7 @@
 		colorful_site_header_branding();
 
 		// Site global navigation.
-		colorful_site_g_navigation();
+		colorful_site_global_navi();
 
 		// Site main header image.
 		colorful_site_header_image();

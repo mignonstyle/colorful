@@ -53,8 +53,8 @@ endif;
 /**
  * Site global navigation.
  */
-if ( ! function_exists( 'colorful_site_g_navigation' ) ) :
-function colorful_site_g_navigation() {
+if ( ! function_exists( 'colorful_site_global_navi' ) ) :
+function colorful_site_global_navi() {
 	?>
 	<nav id="site-navigation" class="main-navigation" role="navigation">
 		<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'colorful' ); ?></button>
