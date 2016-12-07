@@ -8,7 +8,7 @@
  */
 
 /**
- * Print of site branding title and description.
+ * Print site header.
  */
 if ( ! function_exists( 'colorful_site_header_branding' ) ) :
 function colorful_site_header_branding() {
@@ -21,6 +21,12 @@ function colorful_site_header_branding() {
 	colorful_site_header_description();
 
 	echo '</div>' . "\n";
+
+	// Site global navigation.
+	colorful_site_global_navi();
+
+	// Site main header image.
+	colorful_site_header_image();
 }
 endif;
 
