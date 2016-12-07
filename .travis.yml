@@ -36,6 +36,7 @@ env:
 branches:
   only:
     - master
+    - develop
 
 # You can cache arbitrary directories.
 # @link https://docs.travis-ci.com/user/caching/
