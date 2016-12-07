@@ -35,12 +35,16 @@ add_filter( 'body_class', 'colorful_body_classes' );
  */
 if ( ! function_exists( 'colorful_pingback_header' ) ) :
 function colorful_pingback_header() {
+	echo '<meta charset="' . esc_attr( get_bloginfo( 'charset' ) ) . '">' . "\n";
+	echo '<meta name="viewport" content="width=device-width, initial-scale=1">' . "\n";
+	echo '<link rel="profile" href="http://gmpg.org/xfn/11">' . "\n";
+
 	if ( is_singular() && pings_open() ) {
 		echo '<link rel="pingback" href="', bloginfo( 'pingback_url' ), '">';
 	}
 }
 endif;
-add_action( 'wp_head', 'colorful_pingback_header' );
+add_action( 'wp_head', 'colorful_pingback_header', -9999 );
 
 /**
  * Flush out the transients used in colorful_categorized_blog.
