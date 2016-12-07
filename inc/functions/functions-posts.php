@@ -8,6 +8,22 @@
  */
 
 /**
+ * Prints the entry header.
+ */
+if ( ! function_exists( 'colorful_entry_header' ) ) :
+function colorful_entry_header() {
+	// Print the post thumbnails.
+	colorful_post_thumb();
+
+	// Prints the post title.
+	colorful_entry_title();
+
+	// Prints posting meta information in content header.
+	colorful_entry_meta_header();
+}
+endif;
+
+/**
  * Prints the post title.
  */
 if ( ! function_exists( 'colorful_entry_title' ) ) :
@@ -69,12 +85,12 @@ function colorful_excerpt_content() {
 	$more_link = '<p class="more-link"><a href="' . esc_url( get_permalink() ) . '">' . __( 'READ POST', 'chocolat' ) . $more_link_icon . '</a></p>';
 	$more_link = apply_filters( 'colorful_more_link', $more_link );
 
-	echo '<div class="entry-summary">';
-	echo '<div class="cf">' . esc_attr( get_the_excerpt() ) . '</div>';
+	echo '<div class="entry-summary">' . "\n";
+	echo '<div class="cf">' . esc_attr( get_the_excerpt() ) . '</div>' . "\n";
 
 	echo wp_kses( $more_link, array( 'p' => array( 'class' => array() ), 'a' => array( 'href' => array() ), 'i' => array( 'class' => array() ) ) );
 
-	echo '</div>';
+	echo '</div>' . "\n";
 }
 endif;
 
@@ -89,9 +105,9 @@ function colorful_no_post_header() {
 		$pege_title_text = __( 'Nothing Found', 'colorful' );
 	}
 
-	echo '<header class="page-header">';
-	echo '<h1 class="page-title">' . esc_attr( $pege_title_text ) . '</h1>';
-	echo '</header>';
+	echo '<header class="page-header">' . "\n";
+	echo '<h1 class="page-title">' . esc_attr( $pege_title_text ) . '</h1>' . "\n";
+	echo '</header>' . "\n";
 }
 endif;
 
@@ -114,11 +130,11 @@ function colorful_no_post_content() {
 		$search_form = 'true';
 	}
 
-	echo '<div class="page-content">';
-	echo '<p>' . wp_kses( $no_post_text, colorful_wp_kses_allowed_html_link() ) . '</p>';
+	echo '<div class="page-content">' . "\n";
+	echo '<p>' . wp_kses( $no_post_text, colorful_wp_kses_allowed_html_link() ) . '</p>' . "\n";
 	if ( $search_form ) {
 		get_search_form();
 	}
-	echo '</div>';
+	echo '</div>' . "\n";
 }
 endif;
