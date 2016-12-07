@@ -178,3 +178,14 @@ function colorful_no_post_content() {
 	echo '</div>' . "\n";
 }
 endif;
+
+/**
+ * If comments are open or we have at least one comment, load up the comment template.
+ */
+if ( ! function_exists( 'colorful_entry_comments' ) ) :
+function colorful_entry_comments() {
+	if ( is_single() && ( comments_open() || get_comments_number() ) ) {
+		comments_template();
+	}
+}
+endif;
