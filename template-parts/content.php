@@ -19,14 +19,11 @@
 
 	<div class="entry-content">
 		<?php
-		// Print the entry content.
-		colorful_entry_content();
+			// Print the entry content.
+			colorful_entry_content();
 
-
-			wp_link_pages( array(
-				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'colorful' ),
-				'after'  => '</div>',
-			) );
+			// Displays page-links for paginated posts.
+			colorful_post_nextpage();
 		?>
 	</div><!-- .entry-content -->
 
