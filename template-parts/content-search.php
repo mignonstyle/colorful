@@ -2,9 +2,9 @@
 /**
  * Template part for displaying results in search pages.
  *
- * @link https://codex.wordpress.org/Template_Hierarchy
- *
  * @package colorful
+ * @author  Mignon Style
+ * @license GPLv2 or later
  */
 
 ?>

@@ -2,11 +2,9 @@
 /**
  * The header for our theme.
  *
- * This is the template that displays all of the <head> section and everything up until <div id="content">
- *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
- *
  * @package colorful
+ * @author  Mignon Style
+ * @license GPLv2 or later
  */
 
 ?><!DOCTYPE html>

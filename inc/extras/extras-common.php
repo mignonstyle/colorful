@@ -3,7 +3,7 @@
  * Custom functions that act independently of the theme templates.
  *
  * @package colorful
- * @author Mignon Style
+ * @author  Mignon Style
  * @license GPLv2 or later
  */
 

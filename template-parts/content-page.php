@@ -2,9 +2,9 @@
 /**
  * Template part for displaying page content in page.php.
  *
- * @link https://codex.wordpress.org/Template_Hierarchy
- *
  * @package colorful
+ * @author  Mignon Style
+ * @license GPLv2 or later
  */
 
 ?>

@@ -2,9 +2,9 @@
 /**
  * Jetpack Compatibility File.
  *
- * @link https://jetpack.com/
- *
  * @package colorful
+ * @author  Mignon Style
+ * @license GPLv2 or later
  */
 
 /**

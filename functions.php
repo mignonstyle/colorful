@@ -2,9 +2,9 @@
 /**
  * colorful functions and definitions.
  *
- * @link https://developer.wordpress.org/themes/basics/theme-functions/
- *
  * @package colorful
+ * @author  Mignon Style
+ * @license GPLv2 or later
  */
 
 if ( ! function_exists( 'colorful_setup' ) ) :

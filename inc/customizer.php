@@ -3,6 +3,8 @@
  * colorful Theme Customizer.
  *
  * @package colorful
+ * @author  Mignon Style
+ * @license GPLv2 or later
  */
 
 /**
