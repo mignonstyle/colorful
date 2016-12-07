@@ -23,12 +23,11 @@
 		<?php
 		// Print of site branding title and description.
 		colorful_site_header_branding();
+
+		// Site global navigation.
+		colorful_site_g_navigation();
 		?>
 
-		<nav id="site-navigation" class="main-navigation" role="navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'colorful' ); ?></button>
-			<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) ); ?>
-		</nav><!-- #site-navigation -->
 
 		<?php if ( get_header_image() ) : ?>
 		<div class="header-image">
