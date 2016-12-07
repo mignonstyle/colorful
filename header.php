@@ -11,12 +11,7 @@
 
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
-<head<?php
-// prints head prefix.
-if ( ! empty( colorful_head_prefix() ) ) {
-	echo ' prefix="' . esc_attr( colorful_head_prefix() ) . '"';
-}
-?>>
+<head<?php echo ( ! empty( colorful_head_prefix() ) ) ? ' prefix="' . esc_attr( colorful_head_prefix() ) . '"' : ''; ?>>
 <?php wp_head(); ?>
 </head>
 
