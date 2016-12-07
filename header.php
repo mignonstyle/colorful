@@ -21,14 +21,8 @@
 
 	<header id="masthead" class="site-header" role="banner">
 		<?php
-		// Print of site branding title and description.
+		// Print site header.
 		colorful_site_header_branding();
-
-		// Site global navigation.
-		colorful_site_g_navigation();
-
-		// Site main header image.
-		colorful_site_header_image();
 		?>
 	</header><!-- #masthead -->
 
