@@ -11,7 +11,12 @@
 
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
-<head prefix="og: http://ogp.me/ns# <?php echo ( is_single() || is_page() ) ? 'fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#' : 'fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#' ?>">
+<head<?php
+// prints head prefix.
+if ( ! empty( colorful_head_prefix() ) ) {
+	echo ' prefix="' . esc_attr( colorful_head_prefix() ) . '"';
+}
+?>>
 <?php wp_head(); ?>
 </head>
 

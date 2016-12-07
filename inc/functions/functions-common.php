@@ -30,6 +30,25 @@ function colorful_is_mobile() {
 endif;
 
 /**
+ * prints head prefix.
+ */
+if ( ! function_exists( 'colorful_head_prefix' ) ) :
+function colorful_head_prefix() {
+	if ( is_single() || is_page() ) {
+		$head_prefix_fb = 'fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#';
+
+	} else {
+		$head_prefix_fb = 'fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#';
+	}
+
+	$head_prefix = 'og: http://ogp.me/ns# ' . $head_prefix_fb;
+	$head_prefix = apply_filters( 'colorful_head_prefix_args', $head_prefix );
+
+	return $head_prefix;
+}
+endif;
+
+/**
  * Allow tag to wp_kses of icon.
  */
 if ( ! function_exists( 'colorful_wp_kses_allowed_html_icon' ) ) :
