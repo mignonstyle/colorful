@@ -40,7 +40,7 @@ function colorful_pingback_header() {
 	echo '<link rel="profile" href="http://gmpg.org/xfn/11">' . "\n";
 
 	if ( is_singular() && pings_open() ) {
-		echo '<link rel="pingback" href="', bloginfo( 'pingback_url' ), '">';
+		echo '<link rel="pingback" href="', bloginfo( 'pingback_url' ), '">' . "\n";
 	}
 }
 endif;
