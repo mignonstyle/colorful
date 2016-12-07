@@ -145,16 +145,20 @@ endif;
 if ( ! function_exists( 'colorful_no_post_content' ) ) :
 function colorful_no_post_content() {
 	if ( is_home() && current_user_can( 'publish_posts' ) ) {
+
 		$no_post_text = sprintf( __( 'Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'colorful' ), esc_url( admin_url( 'post-new.php' ) ) );
-
 		$search_form = 'false';
-	} elseif ( is_search() ) {
-		$no_post_text = __( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'colorful' );
+	} elseif ( is_404() ) {
 
+		$no_post_text = __( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'colorful' );
+		$search_form = 'true';
+	} elseif ( is_search() ) {
+
+		$no_post_text = __( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'colorful' );
 		$search_form = 'true';
 	} else {
-		$no_post_text = __( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'colorful' );
 
+		$no_post_text = __( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'colorful' );
 		$search_form = 'true';
 	}
 
