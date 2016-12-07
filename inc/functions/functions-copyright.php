@@ -15,7 +15,7 @@ function colorful_footer_info() {
 	$colorful_footer_powered = colorful_footer_powered();
 	$colorful_footer_copyright = colorful_footer_copyright();
 
-	echo '<div class="site-info-footer">';
+	echo '<div class="site-info-footer site-info">';
 
 	echo wp_kses( $colorful_footer_powered, array( 'p' => array( 'class' => array() ), 'a' => array( 'href' => array(), 'target' => array() ) ) );
 	echo wp_kses( $colorful_footer_copyright, array( 'p' => array( 'class' => array() ), 'a' => array( 'href' => array(), 'target' => array() ) ) );
