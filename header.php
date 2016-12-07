@@ -26,15 +26,10 @@
 
 		// Site global navigation.
 		colorful_site_g_navigation();
+
+		// Site main header image.
+		colorful_site_header_image();
 		?>
-
-
-		<?php if ( get_header_image() ) : ?>
-		<div class="header-image">
-			<img src="<?php header_image(); ?>" width="<?php echo esc_attr( get_custom_header()->width ); ?>" height="<?php echo esc_attr( get_custom_header()->height ); ?>" alt="">
-		</div><!-- .header-image -->
-		<?php endif; ?>
-
 	</header><!-- #masthead -->
 
 	<div id="content" class="site-content">

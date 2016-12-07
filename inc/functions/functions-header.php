@@ -66,3 +66,16 @@ function colorful_site_g_navigation() {
 	<?php
 }
 endif;
+
+/**
+ * Site main header image.
+ */
+if ( ! function_exists( 'colorful_site_header_image' ) ) :
+function colorful_site_header_image() {
+	if ( get_header_image() ) : ?>
+	<div class="header-image">
+		<img src="<?php header_image(); ?>" width="<?php echo esc_attr( get_custom_header()->width ); ?>" height="<?php echo esc_attr( get_custom_header()->height ); ?>" alt="">
+	</div><!-- .header-image -->
+	<?php endif;
+}
+endif;
