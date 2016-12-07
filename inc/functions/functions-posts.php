@@ -75,10 +75,38 @@ function colorful_post_thumb() {
 endif;
 
 /**
- * The excerpt read more.
+ * Print the entry content.
  */
-if ( ! function_exists( 'colorful_excerpt_content' ) ) :
-function colorful_excerpt_content() {
+if ( ! function_exists( 'colorful_entry_content' ) ) :
+function colorful_entry_content() {
+	if ( is_singular() ) {
+		// display entry content.
+		colorful_entry_content_post();
+	} else {
+		// display entry excerpt.
+		colorful_entry_content_excerpt();
+	}
+}
+endif;
+
+/**
+ * display entry content.
+ */
+if ( ! function_exists( 'colorful_entry_content_post' ) ) :
+function colorful_entry_content_post() {
+	the_content( sprintf(
+		// translators: %s: Name of current post.
+		wp_kses( __( 'Continue reading %s <span class="meta-nav">&rarr;</span>', 'colorful' ), array( 'span' => array( 'class' => array() ) ) ),
+		the_title( '<span class="screen-reader-text">"', '"</span>', false )
+	) );
+}
+endif;
+
+/**
+ * display entry excerpt.
+ */
+if ( ! function_exists( 'colorful_entry_content_excerpt' ) ) :
+function colorful_entry_content_excerpt() {
 	$more_link_icon = '<i class="fa fa-chevron-right"></i>';
 	$more_link_icon = apply_filters( 'colorful_more_link_icon', $more_link_icon );
 
