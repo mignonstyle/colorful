@@ -30,9 +30,9 @@ function colorful_post_nav() {
 			'next_text' => $post_next_text,
 		);
 
-		echo '<div class="page-nav">';
+		echo '<div class="page-nav">' . "\n";
 		the_post_navigation( $args );
-		echo '</div>';
+		echo '</div>' . "\n";
 	}
 }
 endif;
@@ -63,9 +63,9 @@ function colorful_posts_nav() {
 		'next_text' => $posts_next_text,
 	);
 
-	echo '<div class="page-nav">';
+	echo '<div class="page-nav">' . "\n";
 	the_posts_navigation( $args );
-	echo '</div>';
+	echo '</div>' . "\n";
 }
 endif;
 
@@ -106,11 +106,11 @@ function colorful_pagination() {
 
 	$paginate_links = paginate_links( apply_filters( 'colorful_paginate_links_args', $paginate_links_args ) );
 
-	echo '<div class="pagination cf">';
+	echo '<div class="pagination cf">' . "\n";
 
 	echo wp_kses( $paginate_links, array( 'span' => array( 'class' => array() ), 'a' => array( 'class' => array(), 'href' => array() ) ) );
 
-	echo '</div>';
+	echo '</div>' . "\n";
 }
 endif;
 
