@@ -11,7 +11,12 @@
 
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
-<head prefix="og: http://ogp.me/ns# <?php echo ( is_single() || is_page() ) ? 'fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#' : 'fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#' ?>">
+<head<?php
+// prints head prefix.
+if ( ! empty( colorful_head_prefix() ) ) {
+	echo ' prefix="' . esc_attr( colorful_head_prefix() ) . '"';
+}
+?>>
 <?php wp_head(); ?>
 </head>
 
@@ -20,17 +25,10 @@
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'colorful' ); ?></a>
 
 	<header id="masthead" class="site-header" role="banner">
-		<div class="site-branding">
-			<h1 class="site-branding-title">
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
-			</h1>
-
-			<?php
-			$description = get_bloginfo( 'description', 'display' );
-			if ( $description || is_customize_preview() ) : ?>
-				<p class="site-branding-description"><?php echo esc_attr( $description ); ?></p>
-			<?php endif; ?>
-		</div><!-- .site-branding -->
+		<?php
+		// Print of site branding title and description.
+		colorful_site_header_branding();
+		?>
 
 		<nav id="site-navigation" class="main-navigation" role="navigation">
 			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'colorful' ); ?></button>
