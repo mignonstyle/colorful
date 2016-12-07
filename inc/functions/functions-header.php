@@ -49,3 +49,17 @@ function colorful_site_header_description() {
 	<?php endif;
 }
 endif;
+
+/**
+ * Site global navigation.
+ */
+if ( ! function_exists( 'colorful_site_g_navigation' ) ) :
+function colorful_site_g_navigation() {
+	?>
+	<nav id="site-navigation" class="main-navigation" role="navigation">
+		<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'colorful' ); ?></button>
+		<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) ); ?>
+	</nav><!-- #site-navigation -->
+	<?php
+}
+endif;
