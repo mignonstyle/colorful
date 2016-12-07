@@ -15,3 +15,20 @@ function colorful_custom_menu_setup() {
 }
 endif;
 add_action( 'after_setup_theme', 'colorful_custom_menu_setup' );
+
+/**
+ * Site global navigation.
+ */
+if ( ! function_exists( 'colorful_site_global_navi' ) ) :
+function colorful_site_global_navi() {
+	?>
+	<nav id="site-navigation" class="main-navigation" role="navigation">
+		<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'colorful' ); ?></button>
+		<?php wp_nav_menu( array(
+			'theme_location' => 'primary',
+			'menu_id'        => 'primary-menu',
+		) ); ?>
+	</nav><!-- #site-navigation -->
+	<?php
+}
+endif;
