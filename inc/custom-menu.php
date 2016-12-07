@@ -3,7 +3,7 @@
  * Enable custom menu functions.
  *
  * @package colorful
- * @author Mignon Style
+ * @author  Mignon Style
  * @license GPLv2 or later
  */
 if ( ! function_exists( 'colorful_custom_menu_setup' ) ) :

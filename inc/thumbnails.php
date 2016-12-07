@@ -3,7 +3,7 @@
  * Thumbnails settings.
  *
  * @package colorful
- * @author Mignon Style
+ * @author  Mignon Style
  * @license GPLv2 or later
  */
 

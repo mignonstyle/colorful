@@ -2,7 +2,9 @@
 /**
  * Sample implementation of the Custom Header feature.
  *
- * You can add an optional custom header image to header.php like so ...
+ * @package colorful
+ * @author  Mignon Style
+ * @license GPLv2 or later
  *
 	<?php if ( get_header_image() ) : ?>
 	<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">

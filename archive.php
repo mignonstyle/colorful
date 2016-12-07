@@ -2,9 +2,9 @@
 /**
  * The template for displaying archive pages.
  *
- * @link https://codex.wordpress.org/Template_Hierarchy
- *
  * @package colorful
+ * @author  Mignon Style
+ * @license GPLv2 or later
  */
 
 get_header(); ?>

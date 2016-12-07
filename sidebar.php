@@ -2,9 +2,9 @@
 /**
  * The sidebar containing the main widget area.
  *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
- *
  * @package colorful
+ * @author  Mignon Style
+ * @license GPLv2 or later
  */
 
 if ( ! is_active_sidebar( 'sidebar-1' ) ) {
