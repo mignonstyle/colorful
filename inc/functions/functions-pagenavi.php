@@ -38,6 +38,21 @@ function colorful_post_nav() {
 endif;
 
 /**
+ * Displays the navigation of posts.
+ */
+if ( ! function_exists( 'colorful_posts_page_navigation' ) ) :
+function colorful_posts_page_navigation( $navi_type = 'posts' ) {
+	if ( 'posts' == $navi_type ) {
+		// Prints posts navigation links. (paginate).
+		colorful_pagination();
+	} else {
+		// Displays the navigation to next/previous set of posts, when applicable.
+		colorful_posts_nav();
+	}
+}
+endif;
+
+/**
  * Displays the navigation to next/previous set of posts, when applicable.
  */
 if ( ! function_exists( 'colorful_posts_nav' ) ) :
