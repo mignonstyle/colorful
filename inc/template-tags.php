@@ -55,9 +55,7 @@ function colorful_entry_meta_date() {
 		return false;
 	}
 
-	$meta_date_icon = '<i class="fa fa-calendar"></i>';
-	$meta_date_icon = apply_filters( 'colorful_meta_date_icon', $meta_date_icon );
-
+	$meta_icon = colorful_meta_date_icon();
 	$meta_date = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
 
 	if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
@@ -72,7 +70,7 @@ function colorful_entry_meta_date() {
 	);
 
 	echo '<span class="entry-meta-date  entry-metadata">';
-	echo wp_kses( $meta_date_icon, colorful_wp_kses_allowed_html_icon() );
+	echo wp_kses( $meta_icon, colorful_wp_kses_allowed_html_icon() );
 	echo wp_kses( $meta_date, array( 'time' => array( 'class' => array(), 'datetime' => array() ) ) );
 	echo '</span>';
 }
@@ -87,13 +85,11 @@ function colorful_entry_meta_author() {
 		return false;
 	}
 
-	$meta_author_icon = '<i class="fa fa-user"></i>';
-	$meta_author_icon = apply_filters( 'colorful_meta_author_icon', $meta_author_icon );
-
+	$meta_icon = colorful_meta_author_icon();
 	$meta_author = '<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>';
 
 	echo '<span class="entry-meta-author  entry-metadata">';
-	echo wp_kses( $meta_author_icon, colorful_wp_kses_allowed_html_icon() );
+	echo wp_kses( $meta_icon, colorful_wp_kses_allowed_html_icon() );
 	echo wp_kses( $meta_author, array( 'span' => array( 'class' => array() ), 'a' => array( 'class' => array(), 'href' => array() ) ) );
 	echo '</span>';
 }
@@ -104,8 +100,7 @@ endif;
  */
 if ( ! function_exists( 'colorful_entry_meta_cat' ) ) :
 function colorful_entry_meta_cat() {
-	$meta_cat_icon = '<i class="fa fa-folder-open"></i>';
-	$meta_cat_icon = apply_filters( 'colorful_meta_cat_icon', $meta_cat_icon );
+	$meta_icon = colorful_meta_cat_icon();
 
 	if ( 'post' === get_post_type() ) {
 		// translators: used between list items, there is a space after the comma.
@@ -113,7 +108,7 @@ function colorful_entry_meta_cat() {
 
 		if ( $categories_list && colorful_categorized_blog() ) {
 			echo '<span class="entry-meta-cat entry-metadata">';
-			echo wp_kses( $meta_cat_icon, colorful_wp_kses_allowed_html_icon() );
+			echo wp_kses( $meta_icon, colorful_wp_kses_allowed_html_icon() );
 			echo wp_kses( $categories_list, colorful_wp_kses_allowed_html_link() );
 			echo '</span>';
 		}
@@ -126,15 +121,14 @@ endif;
  */
 if ( ! function_exists( 'colorful_entry_meta_tags' ) ) :
 function colorful_entry_meta_tags() {
-	$meta_tags_icon = '<i class="fa fa-tags"></i>';
-	$meta_tags_icon = apply_filters( 'colorful_meta_tags_icon', $meta_tags_icon );
+	$meta_icon = colorful_meta_tags_icon();
 
 	if ( 'post' === get_post_type() ) {
 		// translators: used between list items, there is a space after the comma.
 		$tags_list = get_the_tag_list( '', esc_html__( ', ', 'colorful' ) );
 		if ( $tags_list ) {
 			echo '<span class="entry-meta-tags entry-metadata tags-links">';
-			echo wp_kses( $meta_tags_icon, colorful_wp_kses_allowed_html_icon() );
+			echo wp_kses( $meta_icon, colorful_wp_kses_allowed_html_icon() );
 			echo wp_kses( $tags_list, colorful_wp_kses_allowed_html_link() );
 			echo '</span>';
 		}
@@ -147,8 +141,7 @@ endif;
  */
 if ( ! function_exists( 'colorful_entry_meta_edit' ) ) :
 function colorful_entry_meta_edit() {
-	$meta_edit_icon = '<i class="fa fa-pencil"></i>';
-	$meta_edit_icon = apply_filters( 'colorful_meta_edit_icon', $meta_edit_icon );
+	$meta_icon = colorful_meta_edit_icon();
 
 	edit_post_link(
 		sprintf(
@@ -156,7 +149,7 @@ function colorful_entry_meta_edit() {
 			esc_html__( 'Edit %s', 'colorful' ),
 			the_title( '<span class="screen-reader-text">"', '"</span>', false )
 		),
-		'<span class="entry-meta-edit entry-metadata edit-link">' . $meta_edit_icon,
+		'<span class="entry-meta-edit entry-metadata edit-link">' . $meta_icon,
 		'</span>'
 	);
 }
@@ -171,12 +164,11 @@ function colorful_entry_meta_comments_link() {
 		return false;
 	}
 
-	$meta_comments_icon = '<i class="fa fa-comment"></i>';
-	$meta_comments_icon = apply_filters( 'colorful_meta_comments_icon', $meta_comments_icon );
+	$meta_icon = colorful_meta_comments_icon();
 
 	if ( ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
 		echo '<span class="entry-meta-comments entry-metadata comments-link">';
-		echo wp_kses( $meta_comments_icon, colorful_wp_kses_allowed_html_icon() );
+		echo wp_kses( $meta_icon, colorful_wp_kses_allowed_html_icon() );
 		// translators: %s: post title.
 		comments_popup_link( sprintf( wp_kses( __( '<span class="screen-reader-text"> on %s</span>', 'colorful' ), array( 'span' => array( 'class' => array() ) ) ), get_the_title() ) );
 		echo '</span>';

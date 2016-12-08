@@ -13,21 +13,18 @@
 if ( ! function_exists( 'colorful_post_nav' ) ) :
 function colorful_post_nav() {
 	if ( is_single() && get_the_post_navigation() ) {
-		$post_prev_icon = '<i class="fa fa-chevron-circle-left"></i>';
-		$post_prev_icon = apply_filters( 'colorful_post_prev_icon', $post_prev_icon );
+		$prev_icon = colorful_post_prev_icon();
+		$next_icon = colorful_post_next_icon();
 
-		$post_prev_text = '<span class="nav-previous">' . $post_prev_icon . '%title</span>';
-		$post_prev_text = apply_filters( 'colorful_post_prev_text', $post_prev_text );
+		$prev_text = '<span class="nav-previous">' . $prev_icon . '%title</span>';
+		$prev_text = apply_filters( 'colorful_post_prev_text', $prev_text );
 
-		$post_next_icon = '<i class="fa fa-chevron-circle-right"></i></span>';
-		$post_next_icon = apply_filters( 'colorful_post_next_icon', $post_next_icon );
-
-		$post_next_text = '<span class="nav-next">%title' . $post_next_icon . '</span>';
-		$post_next_text = apply_filters( 'colorful_post_next_text', $post_next_text );
+		$next_text = '<span class="nav-next">%title' . $next_icon . '</span>';
+		$next_text = apply_filters( 'colorful_post_next_text', $next_text );
 
 		$args = array(
-			'prev_text' => $post_prev_text,
-			'next_text' => $post_next_text,
+			'prev_text' => $prev_text,
+			'next_text' => $next_text,
 		);
 
 		echo '<div class="page-nav">' . "\n";
@@ -61,21 +58,18 @@ function colorful_posts_nav() {
 		return false;
 	}
 
-	$posts_prev_icon = '<i class="fa fa-chevron-circle-left"></i>';
-	$posts_prev_icon = apply_filters( 'colorful_posts_prev_icon', $posts_prev_icon );
+	$prev_icon = colorful_post_prev_icon();
+	$next_icon = colorful_post_next_icon();
 
-	$posts_prev_text = '<span class="nav-previous">' . $posts_prev_icon . __( 'Older posts', 'colorful' ) . '</span>';
-	$posts_prev_text = apply_filters( 'colorful_posts_prev_text', $posts_prev_text );
+	$prev_text = '<span class="nav-previous">' . $prev_icon . __( 'Older posts', 'colorful' ) . '</span>';
+	$prev_text = apply_filters( 'colorful_posts_prev_text', $prev_text );
 
-	$posts_next_icon = '<i class="fa fa-chevron-circle-right"></i></span>';
-	$posts_next_icon = apply_filters( 'colorful_posts_next_icon', $posts_next_icon );
-
-	$posts_next_text = '<span class="nav-next">' . __( 'Newer posts', 'colorful' ) . $posts_next_icon . '</span>';
-	$posts_next_text = apply_filters( 'colorful_posts_next_text', $posts_next_text );
+	$next_text = '<span class="nav-next">' . __( 'Newer posts', 'colorful' ) . $next_icon . '</span>';
+	$next_text = apply_filters( 'colorful_posts_next_text', $next_text );
 
 	$args = array(
-		'prev_text' => $posts_prev_text,
-		'next_text' => $posts_next_text,
+		'prev_text' => $prev_text,
+		'next_text' => $next_text,
 	);
 
 	echo '<div class="page-nav">' . "\n";
