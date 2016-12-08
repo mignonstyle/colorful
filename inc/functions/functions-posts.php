@@ -123,18 +123,22 @@ function colorful_entry_content_excerpt() {
 endif;
 
 /**
- * Print of the page header of no posts and 404 page.
+ * // Print of the page header.
  */
-if ( ! function_exists( 'colorful_no_post_header' ) ) :
-function colorful_no_post_header() {
-	if ( is_404() ) {
+if ( ! function_exists( 'colorful_post_header' ) ) :
+function colorful_post_header() {
+	if ( is_search() ) {
+		$pege_title_text = sprintf( __( 'Search Results for: %s', 'colorful' ), '<span>' . get_search_query() . '</span>' );
+	} else if ( is_archive() ) {
+		$pege_title_text = get_the_archive_title();
+	} else if ( is_404() ) {
 		$pege_title_text = __( '404 Not found', 'colorful' );
 	} else {
 		$pege_title_text = __( 'Nothing Found', 'colorful' );
 	}
 
 	echo '<header class="page-header">' . "\n";
-	echo '<h1 class="page-title">' . esc_attr( $pege_title_text ) . '</h1>' . "\n";
+	echo '<h1 class="page-title">' . wp_kses( $pege_title_text, array( 'span' => array( 'class' => array() ) ) ) . '</h1>' . "\n";
 	echo '</header>' . "\n";
 }
 endif;
