@@ -55,7 +55,7 @@ function colorful_entry_meta_date() {
 		return false;
 	}
 
-	$meta_date_icon = '<i class="fa fa-clock-o"></i>';
+	$meta_date_icon = '<i class="fa fa-calendar"></i>';
 	$meta_date_icon = apply_filters( 'colorful_meta_date_icon', $meta_date_icon );
 
 	$meta_date = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
