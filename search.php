@@ -20,22 +20,20 @@ get_header(); ?>
 			</header><!-- .page-header -->
 
 			<?php
-			/* Start the Loop */
+			// Start the Loop.
 			while ( have_posts() ) : the_post();
 
-				/**
-				 * Run the loop for the search to output the results.
-				 * If you want to overload this in a child theme then include a file
-				 * called content-search.php and that will be used instead.
-				 */
+				// Include the content template of search.
 				get_template_part( 'template-parts/content', 'search' );
 
-			endwhile;
+			endwhile; // End of the loop.
 
-			the_posts_navigation();
+			// Displays the navigation of posts.
+			colorful_posts_page_navigation();
 
 		else :
 
+			// Include the content none template.
 			get_template_part( 'template-parts/content', 'none' );
 
 		endif; ?>

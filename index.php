@@ -22,11 +22,8 @@ get_header(); ?>
 
 			endwhile; // End of the loop.
 
-			// Displays the navigation to next/previous set of posts, when applicable.
-			colorful_posts_nav();
-
-			// Prints posts navigation links. (paginate).
-			colorful_pagination();
+			// Displays the navigation of posts.
+			colorful_posts_page_navigation();
 
 		else :
 
