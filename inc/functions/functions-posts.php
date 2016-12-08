@@ -130,7 +130,8 @@ function colorful_post_header() {
 	if ( is_search() ) {
 		$pege_title_text = sprintf( __( 'Search Results for: %s', 'colorful' ), '<span>' . get_search_query() . '</span>' );
 	} else if ( is_archive() ) {
-		$pege_title_text = get_the_archive_title();
+		$colorful_meta_icon = colorful_meta_icon();
+		$pege_title_text = $colorful_meta_icon . get_the_archive_title();
 	} else if ( is_404() ) {
 		$pege_title_text = __( '404 Not found', 'colorful' );
 	} else {
@@ -138,7 +139,7 @@ function colorful_post_header() {
 	}
 
 	echo '<header class="page-header">' . "\n";
-	echo '<h1 class="page-title">' . wp_kses( $pege_title_text, array( 'span' => array( 'class' => array() ) ) ) . '</h1>' . "\n";
+	echo '<h1 class="page-title">' . wp_kses( $pege_title_text, array( 'span' => array( 'class' => array() ), 'i' => array( 'class' => array() ) ) ) . '</h1>' . "\n";
 	echo '</header>' . "\n";
 }
 endif;
@@ -149,25 +150,21 @@ endif;
 if ( ! function_exists( 'colorful_no_post_content' ) ) :
 function colorful_no_post_content() {
 	if ( is_home() && current_user_can( 'publish_posts' ) ) {
-
 		$no_post_home_text = sprintf( __( 'Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'colorful' ), esc_url( admin_url( 'post-new.php' ) ) );
 		$no_post_text = apply_filters( 'colorful_no_post_home_text', $no_post_home_text );
 
 		$search_form = 'false';
 	} elseif ( is_404() ) {
-
 		$no_post_404_text = __( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'colorful' );
 		$no_post_text = apply_filters( 'colorful_no_post_404_text', $no_post_404_text );
 
 		$search_form = 'true';
 	} elseif ( is_search() ) {
-
 		$no_post_search_text = __( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'colorful' );
 		$no_post_text = apply_filters( 'colorful_no_post_search_text', $no_post_search_text );
 
 		$search_form = 'true';
 	} else {
-
 		$no_post_default_text = __( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'colorful' );
 		$no_post_text = apply_filters( 'colorful_no_post_default_text', $no_post_default_text );
 

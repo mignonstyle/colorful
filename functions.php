@@ -79,6 +79,7 @@ require get_template_directory() . '/inc/functions/functions-header.php';
 // Custom functions that act independently of the theme templates.
 require get_template_directory() . '/inc/extras.php';
 require get_template_directory() . '/inc/extras/extras-common.php';
+require get_template_directory() . '/inc/extras/extras-posts.php';
 
 // Customizer additions.
 require get_template_directory() . '/inc/customizer.php';
