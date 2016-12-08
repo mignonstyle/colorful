@@ -85,29 +85,20 @@ endif;
 if ( ! function_exists( 'colorful_meta_icon' ) ) :
 function colorful_meta_icon() {
 	if ( is_category() ) {
-		$meta_icon_text = 'fa fa-folder-open';
-		$meta_icon_text = apply_filters( 'colorful_meta_cat_icon', $meta_icon_text );
+		$meta_icon = colorful_meta_cat_icon();
 	} elseif ( is_tag() ) {
-		$meta_icon_text = 'fa fa-tags';
-		$meta_icon_text = apply_filters( 'colorful_meta_tags_icon', $meta_icon_text );
+		$meta_icon = colorful_meta_tags_icon();
 	} elseif ( is_author() ) {
-		$meta_icon_text = 'fa fa-user';
-		$meta_icon_text = apply_filters( 'colorful_meta_author_icon', $meta_icon_text );
+		$meta_icon = colorful_meta_author_icon();
 	} elseif ( is_date() ) {
-		$meta_icon_text = 'fa fa-calendar';
-		$meta_icon_text = apply_filters( 'colorful_meta_date_icon', $meta_icon_text );
+		$meta_icon = colorful_meta_date_icon();
 	} elseif ( is_post_type_archive() ) {
-		$meta_icon_text = 'fa fa-archive';
-		$meta_icon_text = apply_filters( 'colorful_meta_archive_icon', $meta_icon_text );
+		$meta_icon = colorful_meta_archive_icon();
 	} elseif ( is_tax() ) {
-		$meta_icon_text = 'fa fa-folder-open-o';
-		$meta_icon_text = apply_filters( 'colorful_meta_tax_icon', $meta_icon_text );
+		$meta_icon = colorful_meta_tax_icon();
 	} else {
-		$meta_icon_text = 'fa fa-bookmark-o';
-		$meta_icon_text = apply_filters( 'colorful_meta_default_icon', $meta_icon_text );
+		$meta_icon = colorful_meta_default_icon();
 	}
-
-	$meta_icon = ( ! empty( $meta_icon_text ) ) ? '<i class="' . $meta_icon_text . '"></i>': '';
 
 	return $meta_icon;
 }

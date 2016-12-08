@@ -12,7 +12,7 @@
  */
 if ( ! function_exists( 'colorful_footer_info' ) ) :
 function colorful_footer_info() {
-	$colorful_footer_powered = colorful_footer_powered();
+	$colorful_footer_powered   = colorful_footer_powered();
 	$colorful_footer_copyright = colorful_footer_copyright();
 
 	echo '<div class="site-info-footer site-info">';

@@ -107,8 +107,7 @@ endif;
  */
 if ( ! function_exists( 'colorful_entry_content_excerpt' ) ) :
 function colorful_entry_content_excerpt() {
-	$more_link_icon = '<i class="fa fa-chevron-right"></i>';
-	$more_link_icon = apply_filters( 'colorful_more_link_icon', $more_link_icon );
+	$more_link_icon = colorful_more_link_icon();
 
 	$more_link = '<p class="more-link"><a href="' . esc_url( get_permalink() ) . '">' . __( 'READ POST', 'chocolat' ) . $more_link_icon . '</a></p>';
 	$more_link = apply_filters( 'colorful_more_link', $more_link );
