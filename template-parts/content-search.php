@@ -11,17 +11,18 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
-		<?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
-
 		<?php
-		// Prints posting meta information in content header.
-		colorful_entry_meta_header();
+		// Prints the entry header.
+		colorful_entry_header();
 		?>
 	</header><!-- .entry-header -->
 
-	<div class="entry-summary">
-		<?php the_excerpt(); ?>
-	</div><!-- .entry-summary -->
+	<div class="entry-content">
+		<?php
+			// Print the entry content.
+			colorful_entry_content();
+		?>
+	</div><!-- .entry-content -->
 
 	<?php
 	// Prints posting meta information in content footer.
