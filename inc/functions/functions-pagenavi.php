@@ -38,13 +38,15 @@ endif;
  * Displays the navigation of posts.
  */
 if ( ! function_exists( 'colorful_posts_page_navigation' ) ) :
-function colorful_posts_page_navigation( $navi_type = 'posts' ) {
-	if ( 'posts' == $navi_type ) {
+function colorful_posts_page_navigation( $navi_type = 'pagination' ) {
+	if ( 'pagination' == $navi_type ) {
 		// Prints posts navigation links. (paginate).
 		colorful_pagination();
+
 	} else {
 		// Displays the navigation to next/previous set of posts, when applicable.
 		colorful_posts_nav();
+
 	}
 }
 endif;
@@ -93,15 +95,12 @@ function colorful_pagination() {
 	$big        = 999999999; // need an unlikely integer.
 	$mid_size   = ( colorful_is_mobile() ) ? 0 : 3 ;
 
-	$prev_text  = __( '&lsaquo;', 'colorful' );
-	$prev_text  = apply_filters( 'colorful_pagination_prev_text', $prev_text );
-
-	$next_text  = __( '&rsaquo;', 'colorful' );
-	$next_text  = apply_filters( 'colorful_pagination_next_text', $next_text );
+	$prev_text  = colorful_pagination_prev_text();
+	$next_text  = colorful_pagination_next_text();
 
 	$translated = __( 'Page', 'colorful' ); // Supply translatable string.
 
-	$paginate_links_args = array(
+	$args = array(
 		'base'               => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
 		'total'              => $wp_query -> max_num_pages,
 		'current'            => max( 1, get_query_var( 'paged' ) ),
@@ -113,7 +112,7 @@ function colorful_pagination() {
 		'after_page_number'  => '</span>',
 	);
 
-	$paginate_links = paginate_links( apply_filters( 'colorful_paginate_links_args', $paginate_links_args ) );
+	$paginate_links = paginate_links( apply_filters( 'colorful_paginate_links_args', $args ) );
 
 	echo '<div class="pagination cf">' . "\n";
 
@@ -142,5 +141,104 @@ function colorful_post_nextpage() {
 	);
 
 	wp_link_pages( apply_filters( 'colorful_link_pages_args', $wp_link_pages_args ) );
+}
+endif;
+
+/**
+ * Displays the comments navigation.
+ */
+if ( ! function_exists( 'colorful_comment_navigation' ) ) :
+function colorful_comment_navigation( $navi_type = 'pagination' ) {
+	// Check for comment navigation.
+	if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : ?>
+	<nav id="comment-nav-below" class="navigation comment-navigation" role="navigation">
+		<h2 class="screen-reader-text"><?php esc_html_e( 'Comment navigation', 'colorful' ); ?></h2>
+
+	<?php
+		if ( 'pagination' == $navi_type ) {
+			// Prints the comments paginate links.
+			colorful_comments_pagination();
+
+		} else {
+			// Displays the comments navigation to next/previous.
+			colorful_comments_nav();
+
+		}
+		?>
+		</nav>
+	<?php
+	endif;
+}
+endif;
+
+/**
+ * Displays the comments navigation to next/previous.
+ */
+if ( ! function_exists( 'colorful_comments_nav' ) ) :
+function colorful_comments_nav() {
+	$prev_icon = colorful_comments_prev_icon();
+	$next_icon = colorful_comments_next_icon();
+
+	$prev_text = $prev_icon . __( 'Older Comments', 'colorful' );
+	$prev_text = apply_filters( 'colorful_comments_prev_text', $prev_text );
+
+	$next_text = __( 'Newer Comments', 'colorful' ) . $next_icon;
+	$next_text = apply_filters( 'colorful_comments_next_text', $next_text );
+	?>
+
+	<div class="nav-links">
+		<div class="nav-previous"><?php previous_comments_link( wp_kses( $prev_text, colorful_wp_kses_allowed_html_icon() ) ); ?></div>
+		<div class="nav-next"><?php next_comments_link( wp_kses( $next_text, colorful_wp_kses_allowed_html_icon() ) ); ?></div>
+	</div><!-- .nav-links -->
+
+	<?php
+}
+endif;
+
+/**
+ * Prints the comments paginate links.
+ */
+if ( ! function_exists( 'colorful_comments_pagination' ) ) :
+function colorful_comments_pagination() {
+	$prev_text  = colorful_pagination_prev_text();
+	$next_text  = colorful_pagination_next_text();
+
+	$translated = __( 'Page', 'colorful' ); // Supply translatable string.
+
+	$args = array(
+		'prev_text'          => $prev_text,
+		'next_text'          => $next_text,
+		'type'               => 'plain',
+		'before_page_number' => '<span class="numbers"><span class="screen-reader-text">' . $translated . ' </span>',
+		'after_page_number'  => '</span>',
+	);
+
+	echo '<div class="pagination cf"><div class="page-links">' . "\n";
+	paginate_comments_links( apply_filters( 'colorful_paginate_comments_links_args', $args ) );
+	echo '</div></div>' . "\n";
+}
+endif;
+
+/**
+ * paginate links prev text.
+ */
+if ( ! function_exists( 'colorful_pagination_prev_text' ) ) :
+function colorful_pagination_prev_text() {
+	$prev_text  = __( '&lsaquo;', 'colorful' );
+	$prev_text  = apply_filters( 'colorful_pagination_prev_text', $prev_text );
+
+	return $prev_text;
+}
+endif;
+
+/**
+ * paginate links next text.
+ */
+if ( ! function_exists( 'colorful_pagination_next_text' ) ) :
+function colorful_pagination_next_text() {
+	$next_text  = __( '&rsaquo;', 'colorful' );
+	$next_text  = apply_filters( 'colorful_pagination_next_text', $next_text );
+
+	return $next_text;
 }
 endif;

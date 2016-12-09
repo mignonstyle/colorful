@@ -124,7 +124,7 @@ endif;
  */
 if ( ! function_exists( 'colorful_post_prev_icon' ) ) :
 function colorful_post_prev_icon() {
-	$meta_icon_text = 'fa fa-chevron-circle-left';
+	$meta_icon_text = 'fa fa-angle-left';
 	$meta_icon_text = apply_filters( 'colorful_post_prev_icon', $meta_icon_text );
 
 	$meta_icon = ( ! empty( $meta_icon_text ) ) ? '<i class="' . $meta_icon_text . '"></i>': '';
@@ -138,10 +138,38 @@ endif;
  */
 if ( ! function_exists( 'colorful_post_next_icon' ) ) :
 function colorful_post_next_icon() {
-	$meta_icon_text = 'fa fa-chevron-circle-right';
+	$meta_icon_text = 'fa fa-angle-right';
 	$meta_icon_text = apply_filters( 'colorful_post_next_icon', $meta_icon_text );
 
 	$meta_icon = ( ! empty( $meta_icon_text ) ) ? '<i class="' . $meta_icon_text . '"></i>': '';
+
+	return $meta_icon;
+}
+endif;
+
+/**
+ * Icon font setting prev of comments.
+ */
+if ( ! function_exists( 'colorful_comments_prev_icon' ) ) :
+function colorful_comments_prev_icon() {
+	$meta_icon_text = '';
+	$meta_icon_text = apply_filters( 'colorful_comments_prev_icon', $meta_icon_text );
+
+	$meta_icon = ( ! empty( $meta_icon_text ) ) ? '<i class="' . $meta_icon_text . '"></i>': colorful_post_prev_icon();
+
+	return $meta_icon;
+}
+endif;
+
+/**
+ * Icon font setting next of comments.
+ */
+if ( ! function_exists( 'colorful_comments_next_icon' ) ) :
+function colorful_comments_next_icon() {
+	$meta_icon_text = '';
+	$meta_icon_text = apply_filters( 'colorful_comments_next_icon', $meta_icon_text );
+
+	$meta_icon = ( ! empty( $meta_icon_text ) ) ? '<i class="' . $meta_icon_text . '"></i>': colorful_post_next_icon();
 
 	return $meta_icon;
 }
@@ -152,7 +180,7 @@ endif;
  */
 if ( ! function_exists( 'colorful_more_link_icon' ) ) :
 function colorful_more_link_icon() {
-	$meta_icon_text = 'fa fa-chevron-right';
+	$meta_icon_text = 'fa fa-angle-right';
 	$meta_icon_text = apply_filters( 'colorful_more_link_icon', $meta_icon_text );
 
 	$meta_icon = ( ! empty( $meta_icon_text ) ) ? '<i class="' . $meta_icon_text . '"></i>': '';
