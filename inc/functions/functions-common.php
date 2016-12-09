@@ -86,18 +86,25 @@ if ( ! function_exists( 'colorful_meta_icon' ) ) :
 function colorful_meta_icon() {
 	if ( is_category() ) {
 		$meta_icon = colorful_meta_cat_icon();
+
 	} elseif ( is_tag() ) {
 		$meta_icon = colorful_meta_tags_icon();
+
 	} elseif ( is_author() ) {
 		$meta_icon = colorful_meta_author_icon();
+
 	} elseif ( is_date() ) {
 		$meta_icon = colorful_meta_date_icon();
+
 	} elseif ( is_post_type_archive() ) {
 		$meta_icon = colorful_meta_archive_icon();
+
 	} elseif ( is_tax() ) {
 		$meta_icon = colorful_meta_tax_icon();
+
 	} else {
 		$meta_icon = colorful_meta_default_icon();
+
 	}
 
 	return $meta_icon;

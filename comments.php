@@ -7,15 +7,11 @@
  * @license GPLv2 or later
  */
 
-/*
- * If the current post is protected by a password and
- * the visitor has not yet entered the password we will
- * return early without loading the comments.
- */
 if ( post_password_required() ) {
 	return;
 }
-?>
+
+if ( have_comments() || comments_open() || pings_open() ) : ?>
 
 <div id="comments" class="comments-area">
 
@@ -24,6 +20,7 @@ if ( post_password_required() ) {
 	if ( have_comments() ) : ?>
 		<h2 class="comments-title">
 			<?php
+				// comment.
 				$comments_number = get_comments_number();
 				if ( 1 === $comments_number ) {
 					printf(
@@ -69,18 +66,9 @@ if ( post_password_required() ) {
 			?>
 		</ol><!-- .comment-list -->
 
-		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // Are there comments to navigate through? ?>
-		<nav id="comment-nav-below" class="navigation comment-navigation" role="navigation">
-			<h2 class="screen-reader-text"><?php esc_html_e( 'Comment navigation', 'colorful' ); ?></h2>
-			<div class="nav-links">
-
-				<div class="nav-previous"><?php previous_comments_link( esc_html__( 'Older Comments', 'colorful' ) ); ?></div>
-				<div class="nav-next"><?php next_comments_link( esc_html__( 'Newer Comments', 'colorful' ) ); ?></div>
-
-			</div><!-- .nav-links -->
-		</nav><!-- #comment-nav-below -->
 		<?php
-		endif; // Check for comment navigation.
+		// Displays the comments navigation.
+		colorful_comment_navigation();
 
 	endif; // Check for have_comments().
 
@@ -96,3 +84,4 @@ if ( post_password_required() ) {
 	?>
 
 </div><!-- #comments -->
+<?php endif; ?>
