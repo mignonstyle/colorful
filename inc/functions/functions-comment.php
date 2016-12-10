@@ -12,8 +12,8 @@
  */
 if ( ! function_exists( 'colorful_list_comments' ) ) :
 function colorful_list_comments() {
-	$reply_text = __( 'Reply', 'colorful' );
-	$reply_text = apply_filters( 'colorful_comment_reply_text', $reply_text );
+	$reply_text  = __( 'Reply', 'colorful' );
+	$reply_text  = apply_filters( 'colorful_comment_reply_text', $reply_text );
 
 	$avatar_size = 50;
 	$avatar_size = apply_filters( 'colorful_comment_avatar_size', $avatar_size );
@@ -44,12 +44,9 @@ function colorful_comment_cb( $comment, $args, $depth ) {
 			<?php
 			// When waiting for approval by administrator.
 			if ( '0' == $comment->comment_approved ) :
-				$awaiting_text = __( 'Your comment is awaiting moderation.', 'colorful' );
-				$awaiting_text = apply_filters( 'colorful_comment_awaiting_text', $awaiting_text );
+				// When waiting for approval by administrator.
+				colorful_comment_awaiting_text();
 
-				if ( ! empty( $awaiting_text ) ) : ?>
-					<p class="comment-awaiting-moderation"><?php echo esc_attr( $awaiting_text ); ?></p>
-				<?php endif;
 			else :
 			// Display comment of posts.
 			?>
@@ -109,17 +106,31 @@ function colorful_comment_cb( $comment, $args, $depth ) {
 endif;
 
 /**
- * Display text when there is no comment.
+ * When waiting for approval by administrator.
+ */
+if ( ! function_exists( 'colorful_comment_awaiting_text' ) ) :
+function colorful_comment_awaiting_text() {
+	$awaiting_text = __( 'Your comment is awaiting moderation.', 'colorful' );
+	$awaiting_text = apply_filters( 'colorful_comment_awaiting_text', $awaiting_text );
+
+	if ( ! empty( $awaiting_text ) ) : ?>
+		<p class="comment-awaiting-moderation"><?php echo esc_attr( $awaiting_text ); ?></p>
+	<?php endif;
+}
+endif;
+
+/**
+ * If comments are closed and there are comments.
  */
 if ( ! function_exists( 'colorful_no_comment' ) ) :
 function colorful_no_comment() {
-	$no_comment_text = __( 'Comments are closed.', 'colorful' );
-	$no_comment_text = apply_filters( 'colorful_no_comment_text', $no_comment_text );
+	if ( ! comments_open() && get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) {
+		$no_comment_text = __( 'Comments are closed.', 'colorful' );
+		$no_comment_text = apply_filters( 'colorful_no_comment_text', $no_comment_text );
 
-	if ( ! empty( $no_comment_text ) ) :
-	?>
-		<p class="no-comments common-contents cf"><?php echo esc_attr( $no_comment_text ); ?></p>
-	<?php
-	endif;
+		if ( ! empty( $no_comment_text ) ) {
+			echo '<p class="no-comments common-contents cf">' . esc_attr( $no_comment_text ) . '</p>';
+		}
+	}
 }
 endif;

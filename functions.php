@@ -81,6 +81,7 @@ require get_template_directory() . '/inc/functions/functions-comment.php';
 require get_template_directory() . '/inc/extras.php';
 require get_template_directory() . '/inc/extras/extras-common.php';
 require get_template_directory() . '/inc/extras/extras-posts.php';
+require get_template_directory() . '/inc/extras/extras-comment.php';
 
 // Customizer additions.
 require get_template_directory() . '/inc/customizer.php';

@@ -49,7 +49,6 @@ if ( have_comments() || comments_open() || pings_open() ) : ?>
 			?>
 		</h2>
 
-
 		<?php
 		// Displays comments for a post or page.
 		colorful_list_comments();
@@ -60,14 +59,10 @@ if ( have_comments() || comments_open() || pings_open() ) : ?>
 	// end　コメントがあるばあい
 	endif; // Check for have_comments().
 
+	// If comments are closed and there are comments.
+	colorful_no_comment();
 
-	// If comments are closed and there are comments, let's leave a little note, shall we?
-	if ( ! comments_open() && get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) {
-		// Display text when there is no comment.
-		colorful_no_comment();
-	}
-
-	// コメントフォームの表示.
+	// Display the posts comment form.
 	comment_form();
 	?>
 	</div><!-- .comments-inner -->
