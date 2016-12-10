@@ -17,9 +17,12 @@ if ( have_comments() || comments_open() || pings_open() ) : ?>
 
 	<?php
 	// You can start editing here -- including this comment!
+	// コメントがあるばあい.
 	if ( have_comments() ) : ?>
+	<div class="comments-inner common-contents cf">
 		<h2 class="comments-title">
 			<?php
+				// コメントタイトル
 				// comment.
 				$comments_number = get_comments_number();
 				if ( 1 === $comments_number ) {
@@ -42,46 +45,31 @@ if ( have_comments() || comments_open() || pings_open() ) : ?>
 						'<span>' . get_the_title() . '</span>'
 					);
 				}
+				// end　コメントタイトル.
 			?>
 		</h2>
 
-		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // Are there comments to navigate through? ?>
-		<nav id="comment-nav-above" class="navigation comment-navigation" role="navigation">
-			<h2 class="screen-reader-text"><?php esc_html_e( 'Comment navigation', 'colorful' ); ?></h2>
-			<div class="nav-links">
-
-				<div class="nav-previous"><?php previous_comments_link( esc_html__( 'Older Comments', 'colorful' ) ); ?></div>
-				<div class="nav-next"><?php next_comments_link( esc_html__( 'Newer Comments', 'colorful' ) ); ?></div>
-
-			</div><!-- .nav-links -->
-		</nav><!-- #comment-nav-above -->
-		<?php endif; // Check for comment navigation. ?>
-
-		<ol class="comment-list">
-			<?php
-				wp_list_comments( array(
-					'style'      => 'ol',
-					'short_ping' => true,
-				) );
-			?>
-		</ol><!-- .comment-list -->
 
 		<?php
+		// Displays comments for a post or page.
+		colorful_list_comments();
+
 		// Displays the comments navigation.
 		colorful_comment_navigation();
 
+	// end　コメントがあるばあい
 	endif; // Check for have_comments().
 
 
 	// If comments are closed and there are comments, let's leave a little note, shall we?
-	if ( ! comments_open() && get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) : ?>
+	if ( ! comments_open() && get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) {
+		// Display text when there is no comment.
+		colorful_no_comment();
+	}
 
-		<p class="no-comments"><?php esc_html_e( 'Comments are closed.', 'colorful' ); ?></p>
-	<?php
-	endif;
-
+	// コメントフォームの表示.
 	comment_form();
 	?>
-
+	</div><!-- .comments-inner -->
 </div><!-- #comments -->
 <?php endif; ?>
