@@ -30,8 +30,10 @@ if ( ! function_exists( 'colorful_entry_title' ) ) :
 function colorful_entry_title() {
 	if ( is_singular() ) {
 		the_title( '<h2 class="entry-title">', '</h2>' );
+
 	} else {
 		the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" title="' . the_title_attribute( 'echo=0' ) . '" rel="bookmark">', '</a></h2>' );
+
 	}
 }
 endif;
@@ -43,8 +45,10 @@ if ( ! function_exists( 'colorful_post_thumb_size' ) ) :
 function colorful_post_thumb_size() {
 	if ( is_singular() ) {
 		$thumb_size = 'large-thumbnail';
+
 	} else {
 		$thumb_size = 'middle-thumbnail';
+
 	}
 
 	return $thumb_size;
@@ -82,9 +86,11 @@ function colorful_entry_content() {
 	if ( is_singular() ) {
 		// display entry content.
 		colorful_entry_content_post();
+
 	} else {
 		// display entry excerpt.
 		colorful_entry_content_excerpt();
+
 	}
 }
 endif;
@@ -109,7 +115,7 @@ if ( ! function_exists( 'colorful_entry_content_excerpt' ) ) :
 function colorful_entry_content_excerpt() {
 	$more_link_icon = colorful_more_link_icon();
 
-	$more_link = '<p class="more-link"><a href="' . esc_url( get_permalink() ) . '">' . __( 'READ POST', 'chocolat' ) . $more_link_icon . '</a></p>';
+	$more_link = '<p class="more-link"><a href="' . esc_url( get_permalink() ) . '">' . __( 'READ POST', 'colorful' ) . $more_link_icon . '</a></p>';
 	$more_link = apply_filters( 'colorful_more_link', $more_link );
 
 	echo '<div class="entry-summary">' . "\n";
@@ -128,13 +134,17 @@ if ( ! function_exists( 'colorful_post_header' ) ) :
 function colorful_post_header() {
 	if ( is_search() ) {
 		$pege_title_text = sprintf( __( 'Search Results for: %s', 'colorful' ), '<span>' . get_search_query() . '</span>' );
+
 	} else if ( is_archive() ) {
 		$colorful_meta_icon = colorful_meta_icon();
 		$pege_title_text = $colorful_meta_icon . get_the_archive_title();
+
 	} else if ( is_404() ) {
 		$pege_title_text = __( '404 Not found', 'colorful' );
+
 	} else {
 		$pege_title_text = __( 'Nothing Found', 'colorful' );
+
 	}
 
 	echo '<header class="page-header">' . "\n";
@@ -153,21 +163,25 @@ function colorful_no_post_content() {
 		$no_post_text = apply_filters( 'colorful_no_post_home_text', $no_post_home_text );
 
 		$search_form = 'false';
+
 	} elseif ( is_404() ) {
 		$no_post_404_text = __( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'colorful' );
 		$no_post_text = apply_filters( 'colorful_no_post_404_text', $no_post_404_text );
 
 		$search_form = 'true';
+
 	} elseif ( is_search() ) {
 		$no_post_search_text = __( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'colorful' );
 		$no_post_text = apply_filters( 'colorful_no_post_search_text', $no_post_search_text );
 
 		$search_form = 'true';
+
 	} else {
 		$no_post_default_text = __( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'colorful' );
 		$no_post_text = apply_filters( 'colorful_no_post_default_text', $no_post_default_text );
 
 		$search_form = 'true';
+
 	}
 
 	echo '<div class="page-content">' . "\n";
