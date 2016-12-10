@@ -18,47 +18,29 @@ if ( have_comments() || comments_open() || pings_open() ) : ?>
 	<?php
 	// You can start editing here -- including this comment!
 	// コメントがあるばあい.
-	if ( have_comments() ) : ?>
-	<div class="comments-inner common-contents cf">
-		<h2 class="comments-title">
+	$comments_number = colorful_get_comments_only_number();
+	if ( 0 < $comments_number ) : ?>
+
+		<div class="comments-inner common-contents cf">
 			<?php
-				// コメントタイトル
-				// comment.
-				$comments_number = get_comments_number();
-				if ( 1 === $comments_number ) {
-					printf(
-						/* translators: %s: post title */
-						esc_html_x( 'One thought on &ldquo;%s&rdquo;', 'comments title', 'colorful' ),
-						'<span>' . get_the_title() . '</span>'
-					);
-				} else {
-					printf( // WPCS: XSS OK.
-						/* translators: 1: number of comments, 2: post title */
-						esc_html( _nx(
-							'%1$s thought on &ldquo;%2$s&rdquo;',
-							'%1$s thoughts on &ldquo;%2$s&rdquo;',
-							$comments_number,
-							'comments title',
-							'colorful'
-						) ),
-						number_format_i18n( $comments_number ),
-						'<span>' . get_the_title() . '</span>'
-					);
-				}
-				// end　コメントタイトル.
+			// Display the comment title.
+			colorful_comment_title();
+
+			// Displays comments for a post or page.
+			colorful_list_comments();
 			?>
-		</h2>
+		</div><!-- /comments-inner -->
 
 		<?php
-		// Displays comments for a post or page.
-		colorful_list_comments();
+		if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) {
+			// Displays the comments navigation.
+			colorful_comment_navigation();
+		}
 
-		// Displays the comments navigation.
-		colorful_comment_navigation();
-
-	// end　コメントがあるばあい
+	// end　コメントがあるばあい.
 	endif; // Check for have_comments().
 
+	// pinback.
 	// If comments are closed and there are comments.
 	colorful_no_comment();
 

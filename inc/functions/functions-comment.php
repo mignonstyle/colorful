@@ -8,6 +8,59 @@
  */
 
 /**
+ * Get number of comments.
+ */
+if ( ! function_exists( 'colorful_get_comments_only_number' ) ) :
+function colorful_get_comments_only_number() {
+	global $id;
+
+	$comment_cnt = 0;
+	$comments    = get_approved_comments( $id );
+	foreach ( $comments as $comment ) {
+		if ( '' === $comment->comment_type ) {
+			$comment_cnt++;
+		}
+	}
+
+	return $comment_cnt;
+}
+endif;
+
+/**
+ * Get number of trackback and pinback.
+ */
+if ( ! function_exists( 'colorful_get_pings_only_number' ) ) :
+function colorful_get_pings_only_number() {
+	$comments_number = get_comments_number();
+	$comment_cnt     = colorful_get_comments_only_number();
+
+	$trackback_cnt   = ( 0 < $comments_number ) ? $comments_number - $comment_cnt : 0;
+
+	return $trackback_cnt;
+}
+endif;
+
+/**
+ * Display the comment title.
+ */
+if ( ! function_exists( 'colorful_comment_title' ) ) :
+function colorful_comment_title() {
+	$comments_number = colorful_get_comments_only_number();
+	echo '<h2 class="comments-title">';
+
+	if ( 1 === $comments_number ) {
+		printf( esc_attr__( '%d Comment', 'chocolat' ), absint( $comments_number ) );
+
+	} else {
+		printf( esc_attr__( '%d Comments', 'chocolat' ), absint( $comments_number ) );
+
+	}
+
+	echo '</h2>';
+}
+endif;
+
+/**
  * Displays comments for a post or page.
  */
 if ( ! function_exists( 'colorful_list_comments' ) ) :
