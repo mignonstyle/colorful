@@ -8,7 +8,7 @@
  */
 
 /**
- * Displays all comments for a post or page.
+ * Displays comments for a post or page.
  */
 if ( ! function_exists( 'colorful_list_comments' ) ) :
 function colorful_list_comments() {
@@ -109,19 +109,17 @@ function colorful_comment_cb( $comment, $args, $depth ) {
 endif;
 
 /**
- *
+ * Display text when there is no comment.
  */
 if ( ! function_exists( 'colorful_no_comment' ) ) :
 function colorful_no_comment() {
-	/*
-	$options = chocolat_get_option();
-	if ( ! empty( $options['show_no_comment'] ) ) {
-?>
-	<div class="no-comments common-contents clearfix">
-		<p><?php _e( 'Comments are closed.', 'chocolat' ); ?></p>
-	</div>
-<?php
-	}
-	*/
+	$no_comment_text = __( 'Comments are closed.', 'colorful' );
+	$no_comment_text = apply_filters( 'colorful_no_comment_text', $no_comment_text );
+
+	if ( ! empty( $no_comment_text ) ) :
+	?>
+		<p class="no-comments common-contents cf"><?php echo esc_attr( $no_comment_text ); ?></p>
+	<?php
+	endif;
 }
 endif;

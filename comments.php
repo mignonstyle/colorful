@@ -51,13 +51,9 @@ if ( have_comments() || comments_open() || pings_open() ) : ?>
 
 
 		<?php
-		// Displays all comments for a post or page.
+		// Displays comments for a post or page.
 		colorful_list_comments();
-		?>
 
-
-		<?php
-		// コメントのページネーション
 		// Displays the comments navigation.
 		colorful_comment_navigation();
 
@@ -66,13 +62,10 @@ if ( have_comments() || comments_open() || pings_open() ) : ?>
 
 
 	// If comments are closed and there are comments, let's leave a little note, shall we?
-	// コメントが閉じられているばあい.
-	if ( ! comments_open() && get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) : ?>
-
-		<p class="no-comments"><?php esc_html_e( 'Comments are closed.', 'colorful' ); ?></p>
-	<?php
-	// end こめんとがとじられてる場合.
-	endif;
+	if ( ! comments_open() && get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) {
+		// Display text when there is no comment.
+		colorful_no_comment();
+	}
 
 	// コメントフォームの表示.
 	comment_form();
