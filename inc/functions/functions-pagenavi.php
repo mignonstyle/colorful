@@ -154,7 +154,7 @@ function colorful_comment_navigation( $navi_type = 'pagination' ) {
 	<nav id="comment-nav-below" class="navigation comment-navigation" role="navigation">
 		<h2 class="screen-reader-text"><?php esc_html_e( 'Comment navigation', 'colorful' ); ?></h2>
 
-	<?php
+		<?php
 		if ( 'pagination' == $navi_type ) {
 			// Prints the comments paginate links.
 			colorful_comments_pagination();
