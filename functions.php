@@ -75,6 +75,7 @@ require get_template_directory() . '/inc/functions/functions-posts.php';
 require get_template_directory() . '/inc/functions/functions-pagenavi.php';
 require get_template_directory() . '/inc/functions/functions-header.php';
 require get_template_directory() . '/inc/functions/functions-icon.php';
+require get_template_directory() . '/inc/functions/functions-comment.php';
 
 // Custom functions that act independently of the theme templates.
 require get_template_directory() . '/inc/extras.php';
