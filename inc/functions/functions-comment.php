@@ -27,36 +27,29 @@ function colorful_get_comments_only_number() {
 endif;
 
 /**
- * Get number of trackback and pinback.
- */
-if ( ! function_exists( 'colorful_get_pings_only_number' ) ) :
-function colorful_get_pings_only_number() {
-	$comments_number = get_comments_number();
-	$comment_cnt     = colorful_get_comments_only_number();
-
-	$trackback_cnt   = ( 0 < $comments_number ) ? $comments_number - $comment_cnt : 0;
-
-	return $trackback_cnt;
-}
-endif;
-
-/**
  * Display the comment title.
  */
 if ( ! function_exists( 'colorful_comment_title' ) ) :
 function colorful_comment_title() {
 	$comments_number = colorful_get_comments_only_number();
-	echo '<h2 class="comments-title">';
+
+	$one_comment_title = sprintf( __( '%d Comment', 'chocolat' ), absint( $comments_number ) );
+	$one_comment_title = apply_filters( 'colorful_one_comment_title', $one_comment_title );
+
+	$multiple_comment_title = sprintf( __( '%d Comments', 'chocolat' ), absint( $comments_number ) );
+	$multiple_comment_title = apply_filters( 'colorful_multiple_comment_title', $multiple_comment_title );
+
+	echo '<h2 class="comments-title">' . "\n";
 
 	if ( 1 === $comments_number ) {
-		printf( esc_attr__( '%d Comment', 'chocolat' ), absint( $comments_number ) );
+		echo esc_attr( $one_comment_title );
 
 	} else {
-		printf( esc_attr__( '%d Comments', 'chocolat' ), absint( $comments_number ) );
+		echo esc_attr( $multiple_comment_title );
 
 	}
 
-	echo '</h2>';
+	echo '</h2>' . "\n";
 }
 endif;
 
@@ -155,6 +148,47 @@ function colorful_comment_cb( $comment, $args, $depth ) {
 		</article><!-- comment-body -->
 	<?php
 	// Note the lack of a trailing </li>. In order to accommodate nested replies, WordPress will add the appropriate closing tag after listing any child elements.
+}
+endif;
+
+/**
+ * Get number of trackback and pinback.
+ */
+if ( ! function_exists( 'colorful_get_pings_only_number' ) ) :
+function colorful_get_pings_only_number() {
+	$comments_number = get_comments_number();
+	$comment_cnt     = colorful_get_comments_only_number();
+
+	$trackback_cnt   = ( 0 < $comments_number ) ? $comments_number - $comment_cnt : 0;
+
+	return $trackback_cnt;
+}
+endif;
+
+/**
+ * Display the trackback and pinback title.
+ */
+if ( ! function_exists( 'colorful_pings_title' ) ) :
+function colorful_pings_title() {
+	$pings_number = colorful_get_pings_only_number();
+
+	$one_pings_title = sprintf( __( '%d Comment', 'chocolat' ), absint( $pings_number ) );
+	$one_pings_title = apply_filters( 'colorful_one_comment_title', $one_pings_title );
+
+	$multiple_pings_title = sprintf( __( '%d Comments', 'chocolat' ), absint( $pings_number ) );
+	$multiple_pings_title = apply_filters( 'colorful_multiple_comment_title', $multiple_pings_title );
+
+	echo '<h2 class="comments-title">' . "\n";
+
+	if ( 1 === $pings_number ) {
+		echo esc_attr( $one_pings_title );
+
+	} else {
+		echo esc_attr( $multiple_pings_title );
+
+	}
+
+	echo '</h2>' . "\n";
 }
 endif;
 
