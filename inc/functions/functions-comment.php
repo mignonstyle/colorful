@@ -12,15 +12,15 @@
  */
 if ( ! function_exists( 'colorful_get_comments_only_number' ) ) :
 function colorful_get_comments_only_number() {
-	global $id;
+	global $post;
 
-	$comment_cnt = 0;
-	$comments    = get_approved_comments( $id );
-	foreach ( $comments as $comment ) {
-		if ( '' === $comment->comment_type ) {
-			$comment_cnt++;
-		}
-	}
+	$comment_cnt = get_comments( array(
+		'status'      => 'approve',
+		'post_status' => 'publish',
+		'post_id'     => $post->ID,
+		'type'        => 'comment',
+		'count'       => true,
+	) );
 
 	return $comment_cnt;
 }
@@ -145,7 +145,7 @@ function colorful_comment_cb( $comment, $args, $depth ) {
 				</div><!-- .comment-body-center -->
 
 			<?php endif; ?>
-		</article><!-- comment-body -->
+		</article><!-- .comment-body -->
 	<?php
 	// Note the lack of a trailing </li>. In order to accommodate nested replies, WordPress will add the appropriate closing tag after listing any child elements.
 }
@@ -156,12 +156,17 @@ endif;
  */
 if ( ! function_exists( 'colorful_get_pings_only_number' ) ) :
 function colorful_get_pings_only_number() {
-	$comments_number = get_comments_number();
-	$comment_cnt     = colorful_get_comments_only_number();
+	global $post;
 
-	$trackback_cnt   = ( 0 < $comments_number ) ? $comments_number - $comment_cnt : 0;
+	$comment_cnt = get_comments( array(
+		'status'      => 'approve',
+		'post_status' => 'publish',
+		'post_id'     => $post->ID,
+		'type'        => 'pings',
+		'count'       => true,
+	) );
 
-	return $trackback_cnt;
+	return $comment_cnt;
 }
 endif;
 
@@ -172,10 +177,10 @@ if ( ! function_exists( 'colorful_pings_title' ) ) :
 function colorful_pings_title() {
 	$pings_number = colorful_get_pings_only_number();
 
-	$one_pings_title = sprintf( __( '%d Comment', 'chocolat' ), absint( $pings_number ) );
+	$one_pings_title = sprintf( __( '%d Trackback', 'chocolat' ), absint( $pings_number ) );
 	$one_pings_title = apply_filters( 'colorful_one_comment_title', $one_pings_title );
 
-	$multiple_pings_title = sprintf( __( '%d Comments', 'chocolat' ), absint( $pings_number ) );
+	$multiple_pings_title = sprintf( __( '%d Trackbacks', 'chocolat' ), absint( $pings_number ) );
 	$multiple_pings_title = apply_filters( 'colorful_multiple_comment_title', $multiple_pings_title );
 
 	echo '<h2 class="comments-title">' . "\n";
@@ -189,6 +194,67 @@ function colorful_pings_title() {
 	}
 
 	echo '</h2>' . "\n";
+}
+endif;
+
+/**
+ * Displays trackback and pinback for a post or page.
+ */
+if ( ! function_exists( 'colorful_list_pings' ) ) :
+function colorful_list_pings() {
+	global $comment, $post;
+	$comment_order = get_option( 'comment_order' );
+
+	$comments_pings = get_comments( array(
+		'number'      => '',
+		'status'      => 'approve',
+		'post_status' => 'publish',
+		'post_id'     => $post->ID,
+		'order'       => $comment_order,
+		'type'        => 'pings',
+	) );
+	?>
+
+	<ol class="comment-list">
+		<?php foreach ( $comments_pings as $comment ) : ?>
+			<li <?php comment_class(); ?> id="comment-<?php comment_ID() ?>">
+				<article id="div-comment-<?php comment_ID(); ?>" class="comment-body cf">
+
+					<div class="comment-body-center">
+
+						<div class="comment-author-data">
+							<?php
+							// comment author name and link.
+							printf( '<span class="comment-author"><cite class="fn">%s</cite></span>', get_comment_author_link() );
+							?>
+
+							<?php
+							// comment edit link.
+							edit_comment_link( __( 'Edit', 'colorful' ), '<span class="edit-link">', '</span>' );
+							?>
+						</div><!-- .comment-author-data -->
+
+						<div class="comment-content">
+							<?php
+							// comment contents text.
+							comment_text();
+							?>
+						</div><!-- .comment-content -->
+
+						<div class="comment-meta commentmetadata">
+							<?php
+							// comment date. translators: 1: date, 2: time.
+							printf( esc_html__( '%1$s %2$s', 'colorful' ), get_comment_date(), get_comment_time() );
+							?>
+						</div><!-- .comment-meta -->
+
+					</div><!-- .comment-body-center -->
+
+				</article><!-- .comment-body -->
+			</li>
+		<?php endforeach; ?>
+	</ol><!-- .comment-list -->
+<?php
 }
 endif;
 
